@@ -1,0 +1,6 @@
+module Pods_Yaari {
+  umbrella header "Pods-Yaari-umbrella.h"
+
+  export *
+  module * { export * }
+}

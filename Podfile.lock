@@ -1,0 +1,79 @@
+PODS:
+  - Alamofire (4.9.1)
+  - BottomPopup (0.7.0)
+  - DZNEmptyDataSet (1.8.1)
+  - IQKeyboardManagerSwift (6.3.0)
+  - KRActivityIndicatorView (3.0.7)
+  - KRProgressHUD (3.4.7):
+    - KRActivityIndicatorView (= 3.0.7)
+  - LinearProgressBar (1.0.2)
+  - MaterialComponents/AnimationTiming (124.1.1)
+  - MaterialComponents/Availability (124.1.1)
+  - MaterialComponents/private/Math (124.1.1)
+  - "MaterialComponents/private/TextControlsPrivate+BaseStyle (124.1.1)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/private/TextControlsPrivate+OutlinedStyle (124.1.1)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/private/TextControlsPrivate+Shared (124.1.1)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - "MaterialComponents/TextControls+Enums"
+  - "MaterialComponents/TextControls+BaseTextAreas (124.1.1)":
+    - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+    - MDFInternationalization
+  - "MaterialComponents/TextControls+Enums (124.1.1)"
+  - "MaterialComponents/TextControls+OutlinedTextAreas (124.1.1)":
+    - MaterialComponents/Availability
+    - "MaterialComponents/private/TextControlsPrivate+OutlinedStyle"
+    - "MaterialComponents/TextControls+BaseTextAreas"
+  - MDFInternationalization (2.0.0)
+  - ScrollingPageControl (0.1.2)
+  - SideMenu (6.5.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - BottomPopup
+  - DZNEmptyDataSet
+  - IQKeyboardManagerSwift (= 6.3.0)
+  - KRProgressHUD
+  - LinearProgressBar
+  - "MaterialComponents/TextControls+OutlinedTextAreas"
+  - ScrollingPageControl
+  - SideMenu (~> 6.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - BottomPopup
+    - DZNEmptyDataSet
+    - IQKeyboardManagerSwift
+    - KRActivityIndicatorView
+    - KRProgressHUD
+    - LinearProgressBar
+    - MaterialComponents
+    - MDFInternationalization
+    - ScrollingPageControl
+    - SideMenu
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  BottomPopup: fe3e284628532f99093ae68c592c6b9d392c972d
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+  KRActivityIndicatorView: ad69e89c4ce40c986cf580595be4829dcad0e35a
+  KRProgressHUD: a248f0bc6c9c2aed40a37b76e03ffecc7f85c887
+  LinearProgressBar: 619d6f286b608e501f39406557f60cdab3faf910
+  MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  ScrollingPageControl: 94dc11078ee5d0cd6c11a1eef46aa181d70b227c
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+
+PODFILE CHECKSUM: 9d097c972bd1d952aa1f712cef9a55e50bd42da3
+
+COCOAPODS: 1.11.2
