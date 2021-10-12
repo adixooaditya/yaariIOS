@@ -11,4 +11,6 @@ pod 'ScrollingPageControl'
 pod 'BottomPopup'
 pod "LinearProgressBar"
 pod 'Alamofire', '~> 4.0'
+pod 'SDWebImage', '~> 5.0'
+
 end

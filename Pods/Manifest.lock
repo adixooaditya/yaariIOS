@@ -34,6 +34,9 @@ PODS:
     - "MaterialComponents/TextControls+BaseTextAreas"
   - MDFInternationalization (2.0.0)
   - ScrollingPageControl (0.1.2)
+  - SDWebImage (5.12.0):
+    - SDWebImage/Core (= 5.12.0)
+  - SDWebImage/Core (5.12.0)
   - SideMenu (6.5.0)
 
 DEPENDENCIES:
@@ -45,6 +48,7 @@ DEPENDENCIES:
   - LinearProgressBar
   - "MaterialComponents/TextControls+OutlinedTextAreas"
   - ScrollingPageControl
+  - SDWebImage (~> 5.0)
   - SideMenu (~> 6.0)
 
 SPEC REPOS:
@@ -59,6 +63,7 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - ScrollingPageControl
+    - SDWebImage
     - SideMenu
 
 SPEC CHECKSUMS:
@@ -72,8 +77,9 @@ SPEC CHECKSUMS:
   MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   ScrollingPageControl: 94dc11078ee5d0cd6c11a1eef46aa181d70b227c
+  SDWebImage: 4ea20cca2986adc5aacde07aa686742fd4c67a37
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
 
-PODFILE CHECKSUM: 9d097c972bd1d952aa1f712cef9a55e50bd42da3
+PODFILE CHECKSUM: aa0edd445b919d305f5f5f903abb269d22d01ca1
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.1

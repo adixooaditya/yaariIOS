@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D1A4A7CE621456B8B25FEEEF27FC983F"
-               BuildableName = "ScrollingPageControl.framework"
+               BuildableName = "libScrollingPageControl.a"
                BlueprintName = "ScrollingPageControl"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

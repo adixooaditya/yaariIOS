@@ -10,6 +10,7 @@ import SideMenu
 import ScrollingPageControl
 import Alamofire
 import KRProgressHUD
+import SDWebImage
 
 
 struct CategoryList {

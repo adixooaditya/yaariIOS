@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "55A01F8E987A6E2F7F0ED141A1ECA406"
-               BuildableName = "MDFInternationalization.framework"
+               BuildableName = "libMDFInternationalization.a"
                BlueprintName = "MDFInternationalization"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
