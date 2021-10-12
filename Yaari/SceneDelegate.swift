@@ -16,6 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        CheckWelcomeStatus()
+
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -54,6 +57,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // change the root view controller to your specific view controller
         window.rootViewController = vc
     }
+    
+    fileprivate func goToHome() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController")
+        window = window ?? UIWindow()
+        window!.rootViewController = nextViewController
+        window!.makeKeyAndVisible()
+    }
+    
+    fileprivate func goToLogin() {
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        window = window ?? UIWindow()
+        window!.rootViewController = nextViewController
+        window!.makeKeyAndVisible()
+    }
+
+    
+    func CheckWelcomeStatus() {
+            let LoginStatus = UserDefaults.standard.value(forKey: AppURL.LoginStatus)
+            if LoginStatus != nil {
+                if LoginStatus as! String == AppURL.LoggedIn {
+                    goToHome()
+                } else {
+                    goToLogin()
+                }
+            } else {
+                goToLogin()
+            }
+        
+    
+
+
+
+}
+
 
 }
 

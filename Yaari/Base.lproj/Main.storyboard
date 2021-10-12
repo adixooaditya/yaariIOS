@@ -24,13 +24,13 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SignupViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupViewController" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGa-VB-hUU">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="346"/>
+                                <rect key="frame" x="0.0" y="225" width="428" height="346"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Path 45" translatesAutoresizingMaskIntoConstraints="NO" id="spm-u6-16F">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="346"/>
@@ -55,7 +55,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enter mobile number to register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yep-cg-bea">
-                                <rect key="frame" x="29" y="384" width="370" height="28"/>
+                                <rect key="frame" x="29" y="609" width="370" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="fo3-oL-1dE"/>
                                 </constraints>
@@ -64,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hHw-9K-HDo">
-                                <rect key="frame" x="51" y="445" width="326" height="48"/>
+                                <rect key="frame" x="51" y="670" width="326" height="48"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j5e-cN-Hop">
                                         <rect key="frame" x="86.666666666666643" y="0.0" width="239.33333333333337" height="48"/>
@@ -115,7 +115,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGi-Gq-Egx">
-                                <rect key="frame" x="99" y="502.99999999999994" width="230" height="27.333333333333343"/>
+                                <rect key="frame" x="99" y="728" width="230" height="27.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already Registered?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Yd-5i-Tic">
                                         <rect key="frame" x="0.0" y="0.0" width="129.33333333333334" height="27.333333333333332"/>
@@ -148,7 +148,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qtG-n8-Mg4">
-                                <rect key="frame" x="145" y="558" width="139" height="39"/>
+                                <rect key="frame" x="145" y="783" width="139" height="39"/>
                                 <color key="backgroundColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="o2f-Cl-emI"/>
@@ -166,7 +166,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="By continuing, you agree to Yaarii's Terms &amp; Conditions and Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WU3-Zp-4Id">
-                                <rect key="frame" x="16" y="613" width="396" height="50"/>
+                                <rect key="frame" x="16" y="838" width="396" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="r1j-pg-svw"/>
                                 </constraints>
@@ -213,8 +213,8 @@
         <!--Login View Controller-->
         <scene sceneID="uCh-gP-fFG">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="kDr-9q-0Yz" customClass="LoginViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oc8-Vq-9uc">
+                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="fullScreen" id="kDr-9q-0Yz" customClass="LoginViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="oc8-Vq-9uc">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -405,7 +405,7 @@
         <!--Home View Controller-->
         <scene sceneID="0Rv-tV-jhy">
             <objects>
-                <viewController id="nOA-oU-SqH" customClass="HomeViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="nOA-oU-SqH" customClass="HomeViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lus-Zr-I4W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="2100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -904,7 +904,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ZA-Vf-D8O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2825" y="-530"/>
+            <point key="canvasLocation" x="2675" y="63"/>
         </scene>
         <!--Product List View Controller-->
         <scene sceneID="2hw-E8-vuA">
@@ -2817,7 +2817,7 @@
         <!--View Controller-->
         <scene sceneID="Cj3-oA-clk">
             <objects>
-                <viewController storyboardIdentifier="OTPViewController" id="fsC-A3-v7k" customClass="OTPViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTPViewController" modalPresentationStyle="fullScreen" id="fsC-A3-v7k" customClass="OTPViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="vs6-MB-U1z">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2879,6 +2879,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="btnResendOTP:" destination="fsC-A3-v7k" eventType="touchUpInside" id="VKO-zP-x4b"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -3196,6 +3199,9 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Essentials" translatesAutoresizingMaskIntoConstraints="NO" id="OTy-JO-5uG">
                                                     <rect key="frame" x="0.0" y="5" width="428" height="147"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="147" id="SOB-yf-Da6"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -3229,7 +3235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mDD-Vk-ToA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2788" y="1127.5862068965519"/>
+            <point key="canvasLocation" x="2786.9158878504672" y="1127.4298056155508"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="JVc-oO-pbx">
@@ -4105,7 +4111,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select CIty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TqX-F6-Okd">
-                                <rect key="frame" x="22" y="54" width="85" height="23"/>
+                                <rect key="frame" x="21.999999999999993" y="54" width="84.333333333333314" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="wb0-Ij-qgo"/>
                                 </constraints>

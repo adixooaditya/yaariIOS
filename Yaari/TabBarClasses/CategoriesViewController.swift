@@ -7,14 +7,20 @@
 
 import UIKit
 import SideMenu
+import Alamofire
+import KRProgressHUD
+import SDWebImage
 
 class CategoriesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     let imageArr   = ["Essentials","Women's Wear","Men's Wear","Kids' Wear","Home & Kitchen"]
+    
+   // var imageArr = [String]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Categories"
         // Do any additional setup after loading the view.
+       // getBannerList()
         setupNavigationBar()
     }
     func setupNavigationBar() {
@@ -62,20 +68,67 @@ class CategoriesViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+//        let imageView = cell.viewWithTag(101) as! UIImageView
+//
+//        let getString = imageArr[indexPath.row]
+//        let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
+//
+//        imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
+//
+//
+//
+//       // imageView.contentMode  = .scaleAspectFit
+        
         let imageView = cell.viewWithTag(101) as! UIImageView
         let imageName = imageArr[indexPath.row]
         imageView.image = UIImage.init(named: imageName)
+
+
         
         return cell
     }
-    /*
-    // MARK: - Navigation
+    /// collectsion banner Api
+    func getBannerList() {
+        KRProgressHUD.show()
+        Alamofire.request(AppURL.getCategorycollections , method: .get).responseJSON
+            { [self] response in
+                
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+                
+                if let result = response.result.value {
+                    if response.result.isSuccess {
+                        
+                        let JSON = result as! NSArray
+
+                    
+                        let statusCode = response.response!.statusCode
+                        
+                        KRProgressHUD.dismiss()
+
+                       // self.imageArr.removeAll()
+                        
+
+                    
+                        
+                        if(JSON != nil){
+
+
+
+                        for user in JSON
+                        {
+                            
+                           print(user)
+
+                            let category_image = (user as AnyObject).value(forKey: AppURL.categorybanners) as! String
+                           // imageArr.append(category_image)
+                        }
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        }
+                    }
+                }
+            }
     }
-    */
 
 }

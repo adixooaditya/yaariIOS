@@ -10,6 +10,8 @@ import SideMenu
 import ScrollingPageControl
 import Alamofire
 import KRProgressHUD
+import SDWebImage
+
 
 
 struct CategoryList {
@@ -21,6 +23,18 @@ struct CategoryList {
 
 }
 
+struct subCategoryList {
+    
+    var subcategory_id:String
+    var subcategory_name: String
+    var subcategory_des: String
+
+    var subcategory_image: String
+
+
+}
+
+
 class HomeViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionViewBottom: UICollectionView!
@@ -28,7 +42,8 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
     @IBOutlet weak var collectionViewEssential: UICollectionView!
     @IBOutlet weak var collectionViewTop: UICollectionView!
     var topArray = [CategoryList]()
-    let bottomArray = ["Bra & Lingerie","Clothing Sets","Earings","T-shirts","Gadgets","Home & Kitchen"]
+   // let bottomArray = ["Bra & Lingerie","Clothing Sets","Earings","T-shirts","Gadgets","Home & Kitchen"]
+   var  bottomArray = [subCategoryList]()
     let bottomArrayImages = ["lingeries","clothingsets","earings","demoImg","gadgets","homeKitchen"]
 
 
@@ -60,6 +75,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         collectionViewBottom.reloadData()
         
         getCategoryList()
+        getSubCategoryList()
 
 
     }
@@ -126,21 +142,11 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         if collectionView == collectionViewTop{
             count = topArray.count
         }else if collectionView == collectionViewEssential{
-            count = topArray.count
+            count = 3
         }
         else if collectionView == collectionViewBottom{
             count = bottomArray.count
         }
-//        switch collectionView {
-//        case collectionViewTop:
-//            items = topArray.count
-//        case collectionViewEssential:
-//            items = 3
-//        case collectionViewBottom:
-//            items = bottomArray.count
-//        default:
-//            items = 0
-//        }
         return count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -153,11 +159,12 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         let imageView = topCell.contentView.viewWithTag(101) as! UIImageView
             let getString = topArray[indexPath.row].category_image
             let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
-            
+            imageView.contentMode  = .scaleAspectFit
+
             imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: ""), options: .forceTransition, progress: nil, completed: nil)
 
 
-            imageView.image = UIImage.init(named: getUrl)
+            //imageView.image = UIImage.init(named: getUrl)
         let lblName = topCell.contentView.viewWithTag(102) as! UILabel
             lblName.text = topArray[indexPath.row].category_name
 
@@ -166,10 +173,22 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         else if collectionView == collectionViewBottom {
             let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: "bottomCell", for: indexPath)
             let imageView = bottomCell.contentView.viewWithTag(101) as! UIImageView
-            imageView.image = UIImage.init(named: bottomArrayImages[indexPath.row])
+           // imageView.image = UIImage.init(named: bottomArrayImages[indexPath.row])
+            
+            let getString = bottomArray[indexPath.row].subcategory_image
+            let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
+
+            imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
+
+            
+            
             imageView.contentMode  = .scaleAspectFit
             let lblName = bottomCell.contentView.viewWithTag(102) as! UILabel
-            lblName.text = bottomArray[indexPath.row]
+            lblName.text = bottomArray[indexPath.row].subcategory_name
+            
+            let lbldes = bottomCell.contentView.viewWithTag(103) as! UILabel
+            lbldes.text = bottomArray[indexPath.row].subcategory_des
+
             return bottomCell
         }
         else {
@@ -179,14 +198,18 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(identifier: "ProductListViewController") as! ProductListViewController
-//        switch collectionView {
-//        case collectionViewTop:
-//            vc.titleStr = topArray[indexPath.row]
-//        case collectionViewBottom:
-//            vc.titleStr = bottomArray[indexPath.row]
-//        default:
-//            vc.titleStr = "Product"
-//        }
+        switch collectionView {
+        case collectionViewTop:
+            vc.titleStr = topArray[indexPath.row].category_name
+            vc.getcategoryId = topArray[indexPath.row].category_id
+
+        case collectionViewBottom:
+            vc.titleStr = bottomArray[indexPath.row].subcategory_name
+            vc.getsubcategory_id = bottomArray[indexPath.row].subcategory_id
+
+        default:
+            vc.titleStr = "Product"
+        }
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -370,5 +393,62 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
                 }
             }
     }
+    
+    /// subcategorylist Api
+    func getSubCategoryList() {
+        KRProgressHUD.show()
+        Alamofire.request(AppURL.getsubcategoriescollections , method: .get).responseJSON
+            { [self] response in
+                
+
+                
+                if let result = response.result.value {
+                    if response.result.isSuccess {
+                        
+                        let JSON = result as! NSArray
+
+                    
+                        let statusCode = response.response!.statusCode
+                        
+                        KRProgressHUD.dismiss()
+
+                        self.bottomArray.removeAll()
+                        
+
+                    
+                        
+                        if(JSON != nil){
+
+
+
+                        for user in JSON
+                        {
+                            
+                           print(user)
+
+
+                            let subcategoryId1 = (user as AnyObject).value(forKey: AppURL.subcategoryId) as AnyObject
+                            let subcategoryId = String(describing: subcategoryId1)
+                            let subcategoryName = (user as AnyObject).value(forKey: AppURL.subcategoryName) as! String
+                            let subdescription = (user as AnyObject).value(forKey: AppURL.subdescription) as! String
+                            
+                            var subcategorybanners = String()
+
+                            if let subcategorybanners1 = (user as AnyObject).value(forKey: AppURL.subcategorybanners) as? String{
+                                subcategorybanners = subcategorybanners1
+                            }else{
+                                
+                            }
+                            self.bottomArray.append(subCategoryList(subcategory_id: subcategoryId, subcategory_name: subcategoryName, subcategory_des: subdescription, subcategory_image: subcategorybanners))
+                        }
+                        DispatchQueue.main.async {
+                            self.collectionViewBottom.reloadData()
+                        }
+                        }
+                    }
+                }
+            }
+    }
+
 
 }

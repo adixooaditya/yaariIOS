@@ -1,4 +1,4 @@
-# platform :iOS, '10.0'
+# platform :iOS, '13.0'
 use_modular_headers!
 
 target 'Yaari' do
@@ -11,4 +11,6 @@ pod 'ScrollingPageControl'
 pod 'BottomPopup'
 pod "LinearProgressBar"
 pod 'Alamofire', '~> 4.0'
+pod 'SDWebImage', '~> 4.0'
+
 end

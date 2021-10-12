@@ -64,6 +64,9 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         
         
     }
+    @IBAction func btnResendOTP(_ sender: Any) {
+        getResendOTP(Mobile: getMobile)
+    }
     func disableBtn() {
         btnNext.isEnabled = false
         btnNext.backgroundColor  = Colors.disabledColor
@@ -198,7 +201,49 @@ func matchOtpLogin(Mobile: String,otp: String) {
     }
 }
 
-    
+   
+    /// Normal Resend OTpApi with Mobile Number
+    /// - Parameter mobile
+    ///   Method Param
+    /// - Parameter Mobile Number
+    func getResendOTP(Mobile: String) {
+        KRProgressHUD.show()
+        let parametersBal: Parameters = [
+            AppURL.mobile: Mobile
+        ]
+
+        print(parametersBal)
+
+        Alamofire.request(AppURL.getlogin, method: .post, parameters: parametersBal).responseJSON { [self]
+            response in
+            print(response)
+            if response.result.isSuccess {
+                if let result = response.result.value {
+                    self.message = (result as AnyObject).value(forKey: AppURL.message) as!
+                        NSString as String
+
+                    let statusCode = response.response!.statusCode
+                    print(statusCode)
+
+                    if statusCode == 200 {
+                        KRProgressHUD.dismiss()
+                        
+                        
+
+                        
+
+                    } else {
+                        KRProgressHUD.dismiss()
+
+                        AlertManager.ShowAlertWithOk(title: AppURL.Login, message: message,presentedViewController: self)
+                        
+
+                    }
+                }
+            }
+        }
+    }
+
 
     
     /// Match Otp task --- otp_verify
@@ -231,11 +276,13 @@ func matchOtpSingup(Mobile: String,otp: String) {
                     let isValid = String(describing: isValid1)
                     
 
-                        let vc = self.storyboard?.instantiateViewController(identifier: "RegisterViewController") as! RegisterViewController
-                        
+                    let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
 
-                        self.navigationController?.pushViewController(vc, animated: true)
+                      let vc = self.storyboard?.instantiateViewController(identifier: "RegisterViewController") as! RegisterViewController
+                    
+                    self.present(vc, animated: true, completion: nil)
 
+                    
 
                     
                     

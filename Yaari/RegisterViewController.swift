@@ -87,20 +87,19 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                 if let result = response.result.value {
 
                     let statusCode = response.response!.statusCode
+                    KRProgressHUD.dismiss()
+                    print(statusCode)
 
-                    if statusCode == 200 {
-                        KRProgressHUD.dismiss()
+                    if statusCode == 201 {
+
                         showDashboard()
 
-                        
-
                     } else {
-//                        self.message = (result as AnyObject).value(forKey: AppURL.message) as!
-//                            NSString as String
+                        self.message = (result as AnyObject).value(forKey: AppURL.message) as! String
 
-                        KRProgressHUD.dismiss()
 
-                        //AlertManager.ShowAlertWithOk(title: AppURL.Register, message: self.message,presentedViewController: self)
+
+                        AlertManager.ShowAlertWithOk(title: AppURL.Register, message: self.message,presentedViewController: self)
 
                     }
                 }

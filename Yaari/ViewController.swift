@@ -65,9 +65,14 @@ class ViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func btnSignInAction(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
-//        self.navigationController?.pushViewController(vc, animated: true)
-        navigationController?.popViewController(animated: true)
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
+
+          let vc = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+
+        
+        self.present(vc, animated: true, completion: nil)
+
         
     }
 
@@ -117,11 +122,17 @@ class ViewController: UIViewController,UITextFieldDelegate {
                         UserDefaults.standard.setValue(Mobile, forKey: AppURL.setMobile)
                         UserDefaults.standard.synchronize()
 
+                        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
 
                           let vc = self.storyboard?.instantiateViewController(identifier: "OTPViewController") as! OTPViewController
                         vc.From = AppURL.Signup
 
-                         self.navigationController?.pushViewController(vc, animated: true)
+                        
+                        self.present(vc, animated: true, completion: nil)
+
+                        
+                        
+                        
 
                         
 
@@ -177,12 +188,11 @@ extension UIViewController {
 
     func showDashboard(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+        let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController") as! UITabBarController
         
-        // This is to get the SceneDelegate object from your view controller
-        // then call the change root view controller function to change to main tab bar
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-        
+        mainTabBarController.selectedIndex = 0
+        self.present(mainTabBarController, animated: true, completion: nil)
+
     }
 
 

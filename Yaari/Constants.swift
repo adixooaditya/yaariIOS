@@ -48,7 +48,14 @@ struct AppURL {
     
     /// Home Page
     static let getCategorycollections = baseURL + "collections"
+    static let getsubcategoriescollections = baseURL + "sub-categories"
+    static let getproducts = baseURL + "products"
+
+    
+    static let getcategories = baseURL + "categories"
+
     static let Home = "Home"
+    static let Main = "Main"
     static let categoryId = "id"
 
     static let categoryName = "name"
@@ -57,6 +64,24 @@ struct AppURL {
     
     static let blankSpace = " "
     static let perTwenty = "%20"
+    
+    
+    static let subcategoryId = "id"
+
+    static let subcategoryName = "name"
+    static let subdescription = "description"
+
+
+    static let subcategorybanners = "banners"
+    
+    
+    static let productid = "id"
+    static let productname = "name"
+    static let productprice = "price"
+    static let productsellingPrice = "sellingPrice"
+    static let productimages = "images"
+
+
 
 
     

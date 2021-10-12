@@ -40,8 +40,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         getLogin(Mobile: mobileText.text!)
     }
     @IBAction func btnSignupAction(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(identifier: "SignupViewController") as! ViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
+
+          let vc = self.storyboard?.instantiateViewController(identifier: "SignupViewController") as! ViewController
+        
+        self.present(vc, animated: true, completion: nil)
+
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
        return range.location < 10
@@ -84,11 +88,14 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                         UserDefaults.standard.setValue(Mobile, forKey: AppURL.setMobile)
                         UserDefaults.standard.synchronize()
 
+                        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
 
                           let vc = self.storyboard?.instantiateViewController(identifier: "OTPViewController") as! OTPViewController
                         vc.From = AppURL.Login
+                        
+                        self.present(vc, animated: true, completion: nil)
 
-                         self.navigationController?.pushViewController(vc, animated: true)
+
 
                         
 

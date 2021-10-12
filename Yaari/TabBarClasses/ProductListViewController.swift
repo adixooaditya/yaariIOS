@@ -7,13 +7,36 @@
 
 import UIKit
 import BottomPopup
+import Alamofire
+import KRProgressHUD
+import SDWebImage
+
+struct productList {
+    
+    var id:String
+    var name: String
+    var price: String
+    var sellingPrice: String
+    var images:[String]
+
+
+
+}
+
+
+
 
 class ProductListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, BottomPopupDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     var titleStr = ""
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var getcategoryId = String()
+    var getsubcategory_id = String()
+    
+    var productListArray = [productList]()
+    /// Initializing All the Objects
+    func initialization() {
         self.title = titleStr
+        print(getcategoryId)
        
         self.tabBarController?.tabBar.isHidden = true
 
@@ -35,6 +58,13 @@ class ProductListViewController: UIViewController,UICollectionViewDelegate,UICol
         collectionView.setCollectionViewLayout(layout, animated: true)
 
         collectionView.reloadData()
+        
+        getProductList()
+
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialization()
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.tabBarController?.tabBar.isHidden = true
@@ -103,11 +133,96 @@ class ProductListViewController: UIViewController,UICollectionViewDelegate,UICol
         present(popupVC, animated: true, completion: nil)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return productListArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath)
        // cell.backgroundColor = UIColor.gray
+        
+        let imageView = cell.contentView.viewWithTag(101) as! UIImageView
+        
+        let getString = productListArray[indexPath.row].images[0]
+        let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
+
+        imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
+
+        
+        
+        imageView.contentMode  = .scaleAspectFit
+        let lblName = cell.contentView.viewWithTag(102) as! UILabel
+        lblName.text = productListArray[indexPath.row].name
+        
+        let lbldes = cell.contentView.viewWithTag(103) as! UILabel
+        lbldes.text = productListArray[indexPath.row].sellingPrice
+
+        
+        let lbldes1 = cell.contentView.viewWithTag(104) as! UILabel
+        lbldes1.text = productListArray[indexPath.row].price
+
+        
         return cell
     }
+    
+    /// productlist Api
+    func getProductList() {
+        KRProgressHUD.show()
+        Alamofire.request(AppURL.getproducts , method: .get).responseJSON
+            { [self] response in
+                
+                print(response)
+                
+
+                
+                if let result = response.result.value {
+                    if response.result.isSuccess {
+                        
+                        let JSON = result as! NSArray
+
+                    
+                        let statusCode = response.response!.statusCode
+                        
+                        KRProgressHUD.dismiss()
+
+                       // self.topArray.removeAll()
+                        
+
+                    
+                        
+                        if(JSON != nil){
+
+
+
+                        for user in JSON
+                        {
+                            
+                           print(user)
+                            
+
+
+
+                            let productid1 = (user as AnyObject).value(forKey: AppURL.productid) as AnyObject
+                            let productid = String(describing: productid1)
+                            let productname = (user as AnyObject).value(forKey: AppURL.productname) as! String
+                            
+                            let productprice1 = (user as AnyObject).value(forKey: AppURL.productprice) as AnyObject
+                            let productprice = String(describing: productprice1)
+
+                            let productsellingPrice1 = (user as AnyObject).value(forKey: AppURL.productsellingPrice) as AnyObject
+                            let productsellingPrice = String(describing: productsellingPrice1)
+
+                            
+                            
+                            
+                            let productimages = (user as AnyObject).value(forKey: AppURL.productimages) as! NSArray
+                            self.productListArray.append(productList(id: productid, name: productname, price: productprice, sellingPrice: productsellingPrice, images: productimages as! [String]))
+                        }
+                        DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        }
+                        }
+                    }
+                }
+            }
+    }
+
 }
