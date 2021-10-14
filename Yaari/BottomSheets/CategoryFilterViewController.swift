@@ -31,6 +31,9 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     
     
     var array = [Category]()
+    
+    var arrSelectedRows:[Int] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,24 +79,35 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell   = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
         cell.lblTitle.text = array[indexPath.row].category_name
-        cell.selectionStyle = .none
+        
+        let id = array[indexPath.row].category_id
+        let strid = Int(id)
+
+        if arrSelectedRows.contains(strid!){
+            cell.btnSelect.setBackgroundImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+        }else{
+            cell.btnSelect.setBackgroundImage(UIImage(named:"Radiobtn"), for: .normal)
+        }
+        cell.btnSelect.tag = strid!
+        cell.btnSelect.addTarget(self, action: #selector(checkBoxSelection(_:)), for: .touchUpInside)
+
         return cell
         
     }
     
-//    @objc func checkBoxSelection(_ sender:UIButton)
-//    {
-//        
-//        if self.arrSelectedRows.contains(sender.tag){
-//            self.arrSelectedRows.remove(at: self.arrSelectedRows.index(of: sender.tag)!)
-//        }else{
-//            self.arrSelectedRows.append(sender.tag)
-//            
-//            print(arrSelectedRows)
-//            
-//        }
-//        self.tableView.reloadData()
-//    }
+    @objc func checkBoxSelection(_ sender:UIButton)
+    {
+
+        if self.arrSelectedRows.contains(sender.tag){
+            self.arrSelectedRows.remove(at: self.arrSelectedRows.index(of: sender.tag)!)
+        }else{
+            self.arrSelectedRows.append(sender.tag)
+            
+            print(arrSelectedRows)
+
+        }
+        self.tableView.reloadData()
+    }
 
     
     /// categorylist Api

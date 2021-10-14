@@ -82,6 +82,33 @@ struct AppURL {
     static let productimages = "images"
 
 
+    /// Product Details Page
+    static let getProductDetails = baseURL + "products"
+    
+    static let getProductDetailscomments = baseURL + "comments"
+    
+    static let getusers = baseURL + "users"
+
+
+    
+    static let productDetailsId = "id"
+    
+    static let productDetailsname = "name"
+
+    static let productDetailssku = "sku"
+
+    static let productDetailsdescription = "description"
+
+    static let productDetailsprice = "price"
+
+    static let productDetailssellingPrice = "sellingPrice"
+
+    
+
+    static let comment = "comment"
+    static let description = "description"
+    static let userId = "userId"
+    static let productId = "productId"
 
 
     

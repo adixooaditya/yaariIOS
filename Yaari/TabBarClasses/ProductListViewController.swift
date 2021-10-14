@@ -68,9 +68,17 @@ class ProductListViewController: UIViewController,UICollectionViewDelegate,UICol
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.tabBarController?.tabBar.isHidden = true
+        
 
         let vc = storyboard?.instantiateViewController(identifier: "ProductDetailViewController") as! ProductDetailViewController
+        vc.getproductId = productListArray[indexPath.row].id
+
         navigationController?.pushViewController(vc, animated: true)
+
+        
+
+
+
     }
     
     @objc func backBtnAction() {
@@ -132,32 +140,51 @@ class ProductListViewController: UIViewController,UICollectionViewDelegate,UICol
         popupVC.popupDelegate = self
         present(popupVC, animated: true, completion: nil)
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+       // return CGSize(width: 170, height: 250)
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ptoductListTVS
+                   let screenSize = UIScreen.main.bounds
+                   let screenWidth = screenSize.size.width
+        let cellWidth = screenWidth/1.3
+                   let size = CGSize(width: cellWidth, height: cell!.contentView.layer.bounds.height)
+                   return size
+
+
+
+
+        
+
+        
+
+       }
+
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productListArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath)
-       // cell.backgroundColor = UIColor.gray
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ptoductListTVS
+//        cell.layer.borderColor = UIColor.lightGray.cgColor
+//        cell.layer.borderWidth = 1
         
-        let imageView = cell.contentView.viewWithTag(101) as! UIImageView
-        
+
         let getString = productListArray[indexPath.row].images[0]
         let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
 
-        imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
+        cell.userImage.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
 
-        
-        
-        imageView.contentMode  = .scaleAspectFit
-        let lblName = cell.contentView.viewWithTag(102) as! UILabel
-        lblName.text = productListArray[indexPath.row].name
-        
-        let lbldes = cell.contentView.viewWithTag(103) as! UILabel
-        lbldes.text = productListArray[indexPath.row].sellingPrice
 
-        
-        let lbldes1 = cell.contentView.viewWithTag(104) as! UILabel
-        lbldes1.text = productListArray[indexPath.row].price
+
+        cell.userImage.contentMode  = .scaleAspectFit
+        cell.userNamelbl.text = productListArray[indexPath.row].name
+
+        cell.sellingpricelbl.text = productListArray[indexPath.row].sellingPrice
+
+
+        cell.pricelbl.text = productListArray[indexPath.row].price
 
         
         return cell
@@ -225,4 +252,31 @@ class ProductListViewController: UIViewController,UICollectionViewDelegate,UICol
             }
     }
 
+}
+class ptoductListTVS:UICollectionViewCell{
+    
+    @IBOutlet weak var numberoffpersonlbl: UILabel!
+    @IBOutlet weak var ratinglbl: UILabel!
+    @IBOutlet weak var freedeliverylbl: UILabel!
+    @IBOutlet weak var perstageofflbl: UILabel!
+    @IBOutlet weak var pricelbl: UILabel!
+    @IBOutlet weak var sellingpricelbl: UILabel!
+    @IBOutlet weak var addvaluelbl: UILabel!
+    @IBOutlet weak var userNamelbl: UILabel!
+    @IBOutlet weak var btnlike: UIButton!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBAction func btnLike(_ sender: Any) {
+    }
+}
+class DynamicHeightCollectionView: UICollectionView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !__CGSizeEqualToSize(bounds.size, intrinsicContentSize) {
+            invalidateIntrinsicContentSize()
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        return contentSize
+    }
 }

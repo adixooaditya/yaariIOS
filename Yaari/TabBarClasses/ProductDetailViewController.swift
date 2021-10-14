@@ -9,9 +9,32 @@
 import UIKit
 import SideMenu
 import ScrollingPageControl
+import Alamofire
+import SDWebImage
+import KRProgressHUD
+
+struct Commment {
+    
+    var comment:String
+    var description: String
+    var userId: String
+    var productId:String
+
+
+
+}
+
 
 class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var numberoffpersonlbl1: UILabel!
+    @IBOutlet weak var rating1lbl: UILabel!
+    @IBOutlet weak var numberoffpersonlbl: UILabel!
+    @IBOutlet weak var ratinglbl: UILabel!
+    @IBOutlet weak var freedeliverylbl: UILabel!
+    @IBOutlet weak var perstatageofflbl: UILabel!
+    @IBOutlet weak var pricelbl: UILabel!
+    @IBOutlet weak var sellingpricelbl: UILabel!
     @IBOutlet weak var tableViewReviews: UITableView!
     @IBOutlet weak var tableViewProgress: UITableView!
     @IBOutlet weak var lblEstimatedDelivery: UILabel!
@@ -23,10 +46,15 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     @IBOutlet weak var collectionViewEssential: UICollectionView!
     @IBOutlet weak var collectionViewTop: UICollectionView!
     var pinCodeFieldVisible  = false
-    let topArray = ["Essentials","Woman","Men","Kids","Decore","Kitchen"]
-    let topArrayImages = ["essentialsHome","womenHome","menhome","kidshome","decorehome","kitchenhome"]
+    var topArray = [String]()
+    var topArrayImages = [String]()
     let bottomArray = ["Bra & Lingerie","Clothing Sets","Earings","T-shirts","Gadgets","Home & Kitchen"]
     let bottomArrayImages = ["lingeries","clothingsets","earings","demoImg","gadgets","homeKitchen"]
+    
+    var ReviewsArray = [Commment]()
+    
+    
+   var getproductId = String()
     @IBAction func btnShowHideDeliveryAction(_ sender: Any) {
         if pinCodeFieldVisible {
             hidePinCodeView()
@@ -63,26 +91,20 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         setupPageControl()
         self.tabBarController?.tabBar.isHidden = true
         hidePinCodeView()
-
-
-//        let cellWidth : CGFloat = collectionViewBottom.frame.size.width / 2.0 - 7.5 //160.0
-//        print("cell width \(cellWidth)")
-//        let cellheight : CGFloat = 200.0 //collectionViewBottom.frame.size.height / 3.0
-//        let cellSize = CGSize(width: cellWidth , height:cellheight)
-//
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical //.horizontal
-//        layout.itemSize = cellSize
-//        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-//        layout.minimumLineSpacing = 10.0
-//        layout.minimumInteritemSpacing = 5.0
-//        collectionViewBottom.setCollectionViewLayout(layout, animated: true)
-//
-//        collectionViewBottom.reloadData()
-
         
-        // Do any additional setup after loading the view.
+        getProductDetails(productId: getproductId)
+        
+        getProductComments()
+
+
     }
+    
+    @objc func backBtnAction() {
+        navigationController?.popViewController(animated: true)
+        self.tabBarController?.tabBar.isHidden = false
+
+    }
+
     func setupPageControl() {
         pageControl.backgroundColor = .clear
         pageControl.selectedColor = .red
@@ -128,14 +150,14 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         navigationController?.pushViewController(vc, animated: true)
         
     }
-    @objc func backBtnAction() {
-        navigationController?.popViewController(animated: true)
-    }
+//    @objc func backBtnAction() {
+//        navigationController?.popViewController(animated: true)
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case tableViewReviews:
-            return 3
+            return ReviewsArray.count
         case tableViewProgress:
             return 5
         default:
@@ -150,8 +172,15 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath)
-            cell.selectionStyle = .none
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as! Comments
+           // cell.selectionStyle = .none
+            
+           // cell.userNamelbl.text = ReviewsArray[indexPath.row].comment
+
+            cell.deslbl.text = ReviewsArray[indexPath.row].comment
+
+
+
             return cell
         }
        
@@ -161,9 +190,9 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         var items = 0
         switch collectionView {
         case collectionViewTop:
-            items = topArray.count
+            items = topArrayImages.count
         case collectionViewEssential:
-            items = 3
+            items = topArray.count
         case collectionViewBottom:
             items = bottomArray.count
         default:
@@ -173,13 +202,32 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectionViewEssential {
-            let essentialCell = collectionView.dequeueReusableCell(withReuseIdentifier: "essentialCell", for: indexPath)
+            let essentialCell = collectionView.dequeueReusableCell(withReuseIdentifier: "essentialCell", for: indexPath) as! productDetailsTVC
+
+            let getString = topArray[indexPath.row]
+            let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
+
+            essentialCell.demoImage.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
+
+            
+            
+            essentialCell.demoImage.contentMode  = .scaleAspectFit
+
             return essentialCell
         }
         else if collectionView == collectionViewTop {
         let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCell", for: indexPath)
         let imageView = topCell.contentView.viewWithTag(101) as! UIImageView
-        imageView.image = UIImage.init(named: topArrayImages[indexPath.row])
+            
+            let getString = topArrayImages[indexPath.row]
+            let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
+
+            imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
+
+            
+            
+            imageView.contentMode  = .scaleAspectFit
+
        
 
         return topCell
@@ -336,15 +384,198 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     }
 
 
+    /// product Details Api
+    /// parameters productId
+    func getProductDetails(productId:String) {
+        KRProgressHUD.show()
+        let strid = "/" + productId
+        Alamofire.request(AppURL.getProductDetails + strid , method: .get).responseJSON
+            { [self] response in
+                
+                print(response)
+                
 
-    /*
-    // MARK: - Navigation
+                
+                if let result = response.result.value {
+                    if response.result.isSuccess {
+                        
+                        KRProgressHUD.dismiss()
+                        
+                        let statusCode = response.response!.statusCode
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+                        if statusCode == 200{
+                            topArray.removeAll()
+                            topArrayImages.removeAll()
+                        
+
+
+                        let name = (result as AnyObject).value(forKey: AppURL.productname) as! String
+
+                        let sku = (result as AnyObject).value(forKey: AppURL.productDetailssku) as! String
+                            var description = String()
+
+                            if  let description1 = (result as AnyObject).value(forKey: AppURL.productDetailsdescription) as? String{
+                                description = description1
+                            }else{
+                                
+                            }
+
+                        let price1 = (result as AnyObject).value(forKey: AppURL.productprice) as AnyObject
+                        let price = String(describing: price1)
+
+                        pricelbl.text = price + "$"
+                        
+                        let sellingPrice1 = (result as AnyObject).value(forKey: AppURL.productsellingPrice) as AnyObject
+                        let sellingPrice = String(describing: sellingPrice1)
+                        
+                        sellingpricelbl.text = sellingPrice + "$"
+                        
+                        let thumbImages = (result as AnyObject).value(forKey: "thumbImages") as! String
+
+                        topArray.append(thumbImages)
+                        
+                        let images = (result as AnyObject).value(forKey: "images") as! NSArray
+                        for user in images{
+                            let getImage = user
+                            topArrayImages.append(getImage as! String)
+
+                        }
+
+                            DispatchQueue.main.async {
+                                self.collectionViewTop.reloadData()
+                                self.collectionViewEssential.reloadData()
+                            }
+
+                            
+           
+                        }
+                        
+                        
+
+                    
+                    }
+                }
+            }
     }
-    */
+    
+    /// Commenets Api
+    func getProductComments() {
+        KRProgressHUD.show()
+        Alamofire.request(AppURL.getProductDetailscomments , method: .get).responseJSON
+            { [self] response in
+                
+                print(response)
+                
 
+                
+                if let result = response.result.value {
+                    if response.result.isSuccess {
+                        
+                        KRProgressHUD.dismiss()
+                        
+                        let statusCode = response.response!.statusCode
+
+                        if statusCode == 200{
+                            topArray.removeAll()
+                            topArrayImages.removeAll()
+                        
+                            let JSON = result as! NSArray
+                            
+                            for user in JSON{
+                                
+                                let userId1 = (user as AnyObject).value(forKey: AppURL.userId) as AnyObject
+                                let userId = String(describing: userId1)
+                                
+                                getUser(userid: userId)
+
+                                let comment = (user as AnyObject).value(forKey: AppURL.comment) as! String
+                            var description = String()
+
+                                if  let description1 = (user as AnyObject).value(forKey: AppURL.description) as? String{
+                                description = description1
+                            }else{
+                                
+                            }
+
+                                let productId1 = (user as AnyObject).value(forKey: AppURL.productid) as AnyObject
+                                let productId = String(describing: productId1)
+                                
+                                if(productId == getproductId){
+
+                                ReviewsArray.append(Commment(comment: comment, description: description, userId: userId,productId: productId))
+                                }
+                                
+                                
+                                
+
+                            }
+                            DispatchQueue.main.async {
+                                tableViewReviews.reloadData()
+                                
+                            }
+
+                            
+           
+                        }
+                        
+                        
+
+                    
+                    }
+                }
+            }
+    }
+
+    
+    
+    /// Normal user Api with userid
+    /// - Parameter userid
+    func getUser(userid: String) {
+        KRProgressHUD.show()
+
+        let id = "/" + userid
+        Alamofire.request(AppURL.getusers + id, method: .get).responseJSON { [self]
+            response in
+            print(response)
+            if response.result.isSuccess {
+                if let result = response.result.value {
+
+                    let statusCode = response.response!.statusCode
+                    print(statusCode)
+
+                    if statusCode == 200 {
+                        KRProgressHUD.dismiss()
+                        
+                        
+                        let firstName = (result as AnyObject).value(forKey: AppURL.firstName) as! String
+
+
+                        
+
+                    } else {
+                        KRProgressHUD.dismiss()
+
+                        
+
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+class productDetailsTVC:UICollectionViewCell{
+    
+    @IBOutlet weak var demoImage: UIImageView!
+    
+}
+class Comments:UITableViewCell{
+    
+    @IBOutlet weak var deslbl: UILabel!
+    @IBOutlet weak var verifylbl: UILabel!
+    @IBOutlet weak var ratinglbl: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
+    
+    @IBOutlet weak var userNamelbl: UILabel!
 }

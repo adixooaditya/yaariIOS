@@ -35,16 +35,7 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let view = self.storyboard?.instantiateViewController(withIdentifier: "AddressBookViewController") as! AddressBookViewController
             self.navigationController?.pushViewController(view, animated: true)
         case 9:
-            let alert = UIAlertController.init(title: "Logout", message:"Are you sure you want to logout?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction.init(title: "Ok", style: .default, handler: { (action) in
-                let loginNavController = self.storyboard!.instantiateViewController(identifier: "LoginNavigationController")
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
-            }))
-            alert.addAction(UIAlertAction.init(title: "Cancel", style: .default, handler: { (action) in
-                
-            }))
-            self.present(alert, animated: true, completion: nil)
-            
+            Logout()
         default:
             print("default")
         }

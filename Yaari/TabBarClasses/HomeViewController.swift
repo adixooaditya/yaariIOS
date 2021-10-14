@@ -221,21 +221,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
            
             
        }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//
-//        let noOfCellsInRow = 2
-//
-//        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-//
-//        let totalSpace = flowLayout.sectionInset.left
-//            + flowLayout.sectionInset.right
-//            + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
-//
-//        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
-//
-//        return CGSize(width: size, height: size)
-//    }
+
     
     class CollectionViewFlowLayout: UICollectionViewFlowLayout
     {
@@ -310,26 +296,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         func scrollDirectionOver() -> UICollectionView.ScrollDirection {
             return UICollectionView.ScrollDirection.vertical
         }
-        //this will fade both top and bottom but can be adjusted
-//        override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//            let attributesSuper: [UICollectionViewLayoutAttributes] = (super.layoutAttributesForElements(in: rect) as [UICollectionViewLayoutAttributes]?)!
-//            if let attributes = NSArray(array: attributesSuper, copyItems: true) as? [UICollectionViewLayoutAttributes]{
-//                var visibleRect = CGRect()
-//                visibleRect.origin = collectionView!.contentOffset
-//                visibleRect.size = collectionView!.bounds.size
-//                for attrs in attributes {
-//                    if attrs.frame.intersects(rect) {
-//                        let distance = visibleRect.midX - attrs.center.x
-//                        let normalizedDistance = abs(distance) / (visibleRect.width * fadeFactor)
-//                        let fade = 1 - normalizedDistance
-//                        attrs.alpha = fade
-//                    }
-//                }
-//                return attributes
-//            }else{
-//                return nil
-//            }
-//        }
+
         //appear and disappear at 0
         override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
             let attributes = super.layoutAttributesForItem(at: itemIndexPath)! as UICollectionViewLayoutAttributes

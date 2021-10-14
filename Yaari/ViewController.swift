@@ -265,20 +265,20 @@ extension UIViewController {
     
 
     
-//    func Logout() {
-//        let uiAlert = UIAlertController(title: "LogOut", message: "Are You Sure Want to Logout ?", preferredStyle: UIAlertController.Style.alert)
-//        present(uiAlert, animated: true, completion: nil)
-//        uiAlert.addAction(UIAlertAction(title: "YES", style: .default, handler: { _ in DispatchQueue.main.async {
-//            UserDefaults.standard.removeObject(forKey: Constants.token)
-//        }
-//        self.setLogOut()
-//        let storyBoard: UIStoryboard = UIStoryboard(name: Constants.Main, bundle: nil)
-//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: Constants.IShopLoginVC) as! IShopLoginVC
-//        self.present(nextViewController, animated: false, completion: nil)
-//        }))
-//        uiAlert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: { _ in
-//        }))
-//    }
+    func Logout() {
+        let uiAlert = UIAlertController(title: "LogOut", message: "Are You Sure Want to Logout ?", preferredStyle: UIAlertController.Style.alert)
+        present(uiAlert, animated: true, completion: nil)
+        uiAlert.addAction(UIAlertAction(title: "YES", style: .default, handler: { _ in DispatchQueue.main.async {
+           UserDefaults.standard.removeObject(forKey: AppURL.token)
+        }
+        self.setLogOut()
+        let storyBoard: UIStoryboard = UIStoryboard(name: AppURL.Main, bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(nextViewController, animated: false, completion: nil)
+        }))
+        uiAlert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: { _ in
+        }))
+    }
     
     
     func setLoggedIn() {
