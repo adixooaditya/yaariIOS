@@ -113,14 +113,17 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         
     }
     @objc func btnMenuAction() {
-        let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenuNavigation") as! SideMenuNavigationController
-        var set = SideMenuSettings()
-        set.presentationStyle = SideMenuPresentationStyle.menuSlideIn
-        set.presentationStyle.presentingEndAlpha = 0.6
-        set.menuWidth = 270
-        set.statusBarEndAlpha = 0
-        menu.settings = set
-        present(menu, animated: true, completion: nil)
+        let vc = storyboard?.instantiateViewController(identifier: "NewMenuViewController") as! NewMenuViewController
+        navigationController?.pushViewController(vc, animated: true)
+        
+//        let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenuNavigation") as! SideMenuNavigationController
+//        var set = SideMenuSettings()
+//        set.presentationStyle = SideMenuPresentationStyle.menuSlideIn
+//        set.presentationStyle.presentingEndAlpha = 0.6
+//        set.menuWidth = 270
+//        set.statusBarEndAlpha = 0
+//        menu.settings = set
+//        present(menu, animated: true, completion: nil)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count:Int!

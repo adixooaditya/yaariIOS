@@ -15,6 +15,7 @@
 		0418662226DE891E00EC411F /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418662126DE891E00EC411F /* ProductListViewController.swift */; };
 		0447679D26E0EC070023A555 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447679C26E0EC060023A555 /* GenderViewController.swift */; };
 		044BBC2C26B9A9B4007426EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BBC2B26B9A9B4007426EE /* LoginViewController.swift */; };
+		045183942715E115003B9B9E /* NewMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045183932715E115003B9B9E /* NewMenuViewController.swift */; };
 		045575AB26BBF14000831191 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045575AA26BBF14000831191 /* RegisterViewController.swift */; };
 		046499C826BC07EE0017EB9E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046499C726BC07EE0017EB9E /* HomeViewController.swift */; };
 		046499CC26BC0BE00017EB9E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046499CB26BC0BE00017EB9E /* MenuViewController.swift */; };
@@ -71,6 +72,7 @@
 		0418662126DE891E00EC411F /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		0447679C26E0EC060023A555 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
 		044BBC2B26B9A9B4007426EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		045183932715E115003B9B9E /* NewMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuViewController.swift; sourceTree = "<group>"; };
 		045575AA26BBF14000831191 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		046499C726BC07EE0017EB9E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		046499CB26BC0BE00017EB9E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				0418662126DE891E00EC411F /* ProductListViewController.swift */,
 				04D6DC5D26EA23C000BC537F /* ProductDetailViewController.swift */,
 				04A2387E26F39FD400BFACBF /* ProductReviewsViewController.swift */,
+				045183932715E115003B9B9E /* NewMenuViewController.swift */,
 			);
 			path = TabBarClasses;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				046783EE26D6CB66004666D6 /* CartViewController.swift in Sources */,
 				04D6DC5E26EA23C000BC537F /* ProductDetailViewController.swift in Sources */,
 				04060BD326DFFA8C0020EBBF /* AddNewAddressViewController.swift in Sources */,
+				045183942715E115003B9B9E /* NewMenuViewController.swift in Sources */,
 				041260C526C6E81D00736C95 /* HTTPManager.swift in Sources */,
 				046499C826BC07EE0017EB9E /* HomeViewController.swift in Sources */,
 				046499CF26BC12200017EB9E /* OrdersViewController.swift in Sources */,
