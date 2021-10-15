@@ -20,6 +20,7 @@ class ProductReviewsViewController: UIViewController,UITableViewDelegate,UITable
         // action:#selector(Class.MethodName) for swift 3
         self.navigationItem.leftBarButtonItem  = button1
         // Do any additional setup after loading the view.
+        
     }
     @objc func backBtnAction() {
         navigationController?.popViewController(animated: true)

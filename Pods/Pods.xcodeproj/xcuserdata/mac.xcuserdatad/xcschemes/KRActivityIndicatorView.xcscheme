@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4F7A1E5A05AF87570E2873C5F725E2CB"
-               BuildableName = "KRActivityIndicatorView.framework"
+               BuildableName = "libKRActivityIndicatorView.a"
                BlueprintName = "KRActivityIndicatorView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BA4681533D6AA601F9C9E2A116B7472C"
-               BuildableName = "KRProgressHUD.framework"
+               BuildableName = "libKRProgressHUD.a"
                BlueprintName = "KRProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
