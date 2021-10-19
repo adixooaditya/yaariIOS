@@ -14,6 +14,7 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     var arrayMenu = ["Bank Details","My Payments","My Shared Catalogues","Earn & Learn","Help","FAQ's"]
+    var arrayImages = ["bank-building","myPayments","myCatalogue","learn","help","FAQ"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Yaari"
@@ -42,6 +43,10 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
         let cell =  tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath)
         let lblName = cell.contentView.viewWithTag(102) as! UILabel
         lblName.text = arrayMenu[indexPath.row]
+        let iconImg = cell.contentView.viewWithTag(101) as! UIImageView
+        iconImg.image = UIImage.init(named: arrayImages[indexPath.row])
+        
+        
         cell.selectionStyle = .none
         return cell
     }
@@ -50,6 +55,19 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        switch arrayMenu[indexPath.row]{
+        case "Help":
+            let vc = storyboard?.instantiateViewController(identifier: "HelpViewController") as! HelpViewController
+            navigationController?.pushViewController(vc, animated: true)
+        case "Earn & Learn" :
+            let vc = storyboard?.instantiateViewController(identifier: "EarnAndLearnViewController") as! EarnAndLearnViewController
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            print("default")
+        }
     }
     /*
     

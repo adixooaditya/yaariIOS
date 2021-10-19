@@ -13,6 +13,12 @@
 		041260C626C6E81D00736C95 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041260C426C6E81D00736C95 /* Reachability.swift */; };
 		041260D226C6E89F00736C95 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041260D126C6E89F00736C95 /* AlertManager.swift */; };
 		0418662226DE891E00EC411F /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418662126DE891E00EC411F /* ProductListViewController.swift */; };
+		041CFEAA271D7854005C8BD2 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEA9271D7854005C8BD2 /* HelpViewController.swift */; };
+		041CFEAD271D7C63005C8BD2 /* MyPaymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEAC271D7C63005C8BD2 /* MyPaymentsViewController.swift */; };
+		041CFEB0271D7C70005C8BD2 /* BankDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEAF271D7C70005C8BD2 /* BankDetailsViewController.swift */; };
+		041CFEB3271D7C86005C8BD2 /* EarnAndLearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEB2271D7C86005C8BD2 /* EarnAndLearnViewController.swift */; };
+		041CFEB6271D7C97005C8BD2 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEB5271D7C97005C8BD2 /* FAQViewController.swift */; };
+		041CFEB9271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEB8271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift */; };
 		0447679D26E0EC070023A555 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447679C26E0EC060023A555 /* GenderViewController.swift */; };
 		044BBC2C26B9A9B4007426EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BBC2B26B9A9B4007426EE /* LoginViewController.swift */; };
 		045183942715E115003B9B9E /* NewMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045183932715E115003B9B9E /* NewMenuViewController.swift */; };
@@ -70,6 +76,12 @@
 		041260C426C6E81D00736C95 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		041260D126C6E89F00736C95 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		0418662126DE891E00EC411F /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		041CFEA9271D7854005C8BD2 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		041CFEAC271D7C63005C8BD2 /* MyPaymentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsViewController.swift; sourceTree = "<group>"; };
+		041CFEAF271D7C70005C8BD2 /* BankDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankDetailsViewController.swift; sourceTree = "<group>"; };
+		041CFEB2271D7C86005C8BD2 /* EarnAndLearnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnAndLearnViewController.swift; sourceTree = "<group>"; };
+		041CFEB5271D7C97005C8BD2 /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		041CFEB8271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySharedCatalogueViewController.swift; sourceTree = "<group>"; };
 		0447679C26E0EC060023A555 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
 		044BBC2B26B9A9B4007426EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		045183932715E115003B9B9E /* NewMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +153,12 @@
 			children = (
 				04060BCF26DFF3B80020EBBF /* AddressBookViewController.swift */,
 				04060BD226DFFA8C0020EBBF /* AddNewAddressViewController.swift */,
+				041CFEA9271D7854005C8BD2 /* HelpViewController.swift */,
+				041CFEAC271D7C63005C8BD2 /* MyPaymentsViewController.swift */,
+				041CFEAF271D7C70005C8BD2 /* BankDetailsViewController.swift */,
+				041CFEB2271D7C86005C8BD2 /* EarnAndLearnViewController.swift */,
+				041CFEB5271D7C97005C8BD2 /* FAQViewController.swift */,
+				041CFEB8271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift */,
 			);
 			path = SideMenuClasses;
 			sourceTree = "<group>";
@@ -432,9 +450,15 @@
 				046783EE26D6CB66004666D6 /* CartViewController.swift in Sources */,
 				04D6DC5E26EA23C000BC537F /* ProductDetailViewController.swift in Sources */,
 				04060BD326DFFA8C0020EBBF /* AddNewAddressViewController.swift in Sources */,
+				041CFEB6271D7C97005C8BD2 /* FAQViewController.swift in Sources */,
 				045183942715E115003B9B9E /* NewMenuViewController.swift in Sources */,
 				041260C526C6E81D00736C95 /* HTTPManager.swift in Sources */,
+				041CFEAA271D7854005C8BD2 /* HelpViewController.swift in Sources */,
+				041CFEAD271D7C63005C8BD2 /* MyPaymentsViewController.swift in Sources */,
+				041CFEB9271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift in Sources */,
+				041CFEB0271D7C70005C8BD2 /* BankDetailsViewController.swift in Sources */,
 				046499C826BC07EE0017EB9E /* HomeViewController.swift in Sources */,
+				041CFEB3271D7C86005C8BD2 /* EarnAndLearnViewController.swift in Sources */,
 				046499CF26BC12200017EB9E /* OrdersViewController.swift in Sources */,
 				04C078D126B9B0E800AD8979 /* OTPViewController.swift in Sources */,
 				04D6366626B3093000C0C04B /* SceneDelegate.swift in Sources */,
