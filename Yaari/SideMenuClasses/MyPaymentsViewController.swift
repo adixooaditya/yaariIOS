@@ -7,14 +7,22 @@
 
 import UIKit
 
-class MyPaymentsViewController: UIViewController {
+class MyPaymentsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath)
+        cell.selectionStyle = .none
+        return cell
+    }
 
     /*
     // MARK: - Navigation

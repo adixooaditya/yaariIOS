@@ -11,7 +11,7 @@ class BankDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "Bank Details"
         // Do any additional setup after loading the view.
     }
     

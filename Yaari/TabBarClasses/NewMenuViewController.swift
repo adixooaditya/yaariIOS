@@ -65,6 +65,18 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
         case "Earn & Learn" :
             let vc = storyboard?.instantiateViewController(identifier: "EarnAndLearnViewController") as! EarnAndLearnViewController
             navigationController?.pushViewController(vc, animated: true)
+        case "My Payments":
+            let vc = storyboard?.instantiateViewController(identifier: "MyPaymentsViewController")  as! MyPaymentsViewController
+            navigationController?.pushViewController(vc, animated: true)
+        case "FAQ's":
+            let vc = storyboard?.instantiateViewController(identifier: "FAQViewController")  as! FAQViewController
+            navigationController?.pushViewController(vc, animated: true)
+        case "Bank Details":
+            let vc = storyboard?.instantiateViewController(identifier: "BankDetailsViewController")  as! BankDetailsViewController
+            navigationController?.pushViewController(vc, animated: true)
+        case "My Shared Catalogues":
+            let vc = storyboard?.instantiateViewController(identifier: "MySharedCatalogueViewController")  as! MySharedCatalogueViewController
+            navigationController?.pushViewController(vc, animated: true)
         default:
             print("default")
         }
