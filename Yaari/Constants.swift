@@ -88,8 +88,25 @@ struct AppURL {
     static let getProductDetailscomments = baseURL + "comments"
     
     static let getusers = baseURL + "users"
+    
+    static let Addwishlist = baseURL + "wishlist-details"
+    static let getwishlist = baseURL + "wishlists"
+    static let getcolors = baseURL + "colors"
+    
+    
 
 
+static let wishlistproductId = "productId"
+static let wishlistquantity = "quantity"
+static let wishlistId = "wishlistId"
+
+static let getuserId = "userId"
+static let getwishlistId = "id"
+
+
+    
+    
+static let filter = "filter"
     
     static let productDetailsId = "id"
     

@@ -52,6 +52,7 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     let bottomArrayImages = ["lingeries","clothingsets","earings","demoImg","gadgets","homeKitchen"]
     
     var ReviewsArray = [Commment]()
+    var productReview = [AnyObject]()
     
     
    var getproductId = String()
@@ -68,6 +69,7 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     
     @IBAction func btnViewAllReviewAction(_ sender: Any) {
         let vc =  storyboard?.instantiateViewController(identifier: "ProductReviewsViewController") as! ProductReviewsViewController
+        vc.getproductId = getproductId
         navigationController?.pushViewController(vc, animated: true)
     }
     func showPinCodeView() {
@@ -347,27 +349,6 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         func scrollDirectionOver() -> UICollectionView.ScrollDirection {
             return UICollectionView.ScrollDirection.vertical
         }
-        //this will fade both top and bottom but can be adjusted
-//        override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//            let attributesSuper: [UICollectionViewLayoutAttributes] = (super.layoutAttributesForElements(in: rect) as [UICollectionViewLayoutAttributes]?)!
-//            if let attributes = NSArray(array: attributesSuper, copyItems: true) as? [UICollectionViewLayoutAttributes]{
-//                var visibleRect = CGRect()
-//                visibleRect.origin = collectionView!.contentOffset
-//                visibleRect.size = collectionView!.bounds.size
-//                for attrs in attributes {
-//                    if attrs.frame.intersects(rect) {
-//                        let distance = visibleRect.midX - attrs.center.x
-//                        let normalizedDistance = abs(distance) / (visibleRect.width * fadeFactor)
-//                        let fade = 1 - normalizedDistance
-//                        attrs.alpha = fade
-//                    }
-//                }
-//                return attributes
-//            }else{
-//                return nil
-//            }
-//        }
-        //appear and disappear at 0
         override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
             let attributes = super.layoutAttributesForItem(at: itemIndexPath)! as UICollectionViewLayoutAttributes
             attributes.alpha = 0
@@ -480,13 +461,17 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
                             topArrayImages.removeAll()
                         
                             let JSON = result as! NSArray
+                            productReview = result as! [AnyObject]
                             
+
                             for user in JSON{
                                 
                                 let userId1 = (user as AnyObject).value(forKey: AppURL.userId) as AnyObject
                                 let userId = String(describing: userId1)
                                 
-                                getUser(userid: userId)
+
+                                
+                               // getUser(userid: userId)
 
                                 let comment = (user as AnyObject).value(forKey: AppURL.comment) as! String
                             var description = String()
@@ -500,10 +485,10 @@ class ProductDetailViewController: UIViewController,UICollectionViewDelegate,UIC
                                 let productId1 = (user as AnyObject).value(forKey: AppURL.productid) as AnyObject
                                 let productId = String(describing: productId1)
                                 
-                                if(productId == getproductId){
+                                //if(productId == getproductId){
 
                                 ReviewsArray.append(Commment(comment: comment, description: description, userId: userId,productId: productId))
-                                }
+                                //}
                                 
                                 
                                 

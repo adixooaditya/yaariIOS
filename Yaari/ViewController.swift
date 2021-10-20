@@ -183,7 +183,78 @@ extension UITextField {
 }
 extension UIViewController {
     
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
     
+    func decode(jwtToken jwt: String) -> [String: Any] {
+      let segments = jwt.components(separatedBy: ".")
+      return decodeJWTPart(segments[1]) ?? [:]
+    }
+    
+    func base64UrlDecode(_ value: String) -> Data? {
+      var base64 = value
+        .replacingOccurrences(of: "-", with: "+")
+        .replacingOccurrences(of: "_", with: "/")
+
+      let length = Double(base64.lengthOfBytes(using: String.Encoding.utf8))
+      let requiredLength = 4 * ceil(length / 4.0)
+      let paddingLength = requiredLength - length
+      if paddingLength > 0 {
+        let padding = "".padding(toLength: Int(paddingLength), withPad: "=", startingAt: 0)
+        base64 = base64 + padding
+      }
+      return Data(base64Encoded: base64, options: .ignoreUnknownCharacters)
+    }
+
+    func decodeJWTPart(_ value: String) -> [String: Any]? {
+      guard let bodyData = base64UrlDecode(value),
+        let json = try? JSONSerialization.jsonObject(with: bodyData, options: []), let payload = json as? [String: Any] else {
+          return nil
+      }
+
+      return payload
+    }
+
+
+    
+    func categoryfliterList(categoryId:String) -> String{
+        
+
+            let strvalue = "{\"where\": {\"and\":[{\"status\":\"active\"},{\"or\":[{\"categoryId\":\"\(categoryId)\")}]}}"
+
+      return strvalue
+        
+    }
+
+    
+    func fliter(collectsionId:String) -> String{
+        
+
+            let strvalue = "{\"where\": {\"and\":[{\"status\":\"active\"},{\"or\":[{\"collectionId\":\"\(collectsionId)\"}]}}"
+
+      return strvalue
+        
+    }
     
 
     func showDashboard(){

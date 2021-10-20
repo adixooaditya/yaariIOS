@@ -216,6 +216,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
    
        let page = round(scrollView.contentOffset.x / scrollView.frame.width)
+        print(page)
        pageControl.selectedPage = Int(page)
        
            
@@ -226,6 +227,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
     class CollectionViewFlowLayout: UICollectionViewFlowLayout
     {
         
+
         
         override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint
         {

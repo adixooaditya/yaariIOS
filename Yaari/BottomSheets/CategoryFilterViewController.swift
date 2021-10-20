@@ -20,6 +20,14 @@ struct Category {
 
 }
 
+struct CategoryFilter {
+    
+    var categoryId:String
+
+
+}
+
+
 class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     var height: CGFloat?
@@ -27,12 +35,18 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     var presentDuration: Double?
     var dismissDuration: Double?
     var shouldDismissInteractivelty: Bool?
-//    let array = ["Indian & Fusion Wear (170542)","Western Wear (170542)","Footwear (170542)","Sports & Active Wear (170542)","Lingerie & Sleepwear (170542)","Beauty & Personal Care (170542)","Jewellery (170542)","Gadgets (170542)","Boys Clothing (170542)","Girls Clothing (170542)","Boys Footwear (170542)","Girls Footwear (170542)","Infants (170542)","Kids Accessories (170542)","Innerwear & Sleepwear (170542)"]
     
     
     var array = [Category]()
     
     var arrSelectedRows:[Int] = []
+    var getcategoryId = String()
+    var getsubcategoryId = String()
+    
+    var categoryFilterArray = [CategoryFilter]()
+    var cateroryfilter = [String]()
+    
+    
 
 
     override func viewDidLoad() {
@@ -69,7 +83,25 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
 
     }
     @IBAction func btnApplyAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        
+         var setcategoryFilter = "1"
+        
+        
+        var stringArray = arrSelectedRows.map { String($0) }
+
+        
+       let filtercategoryId = stringArray.joined(separator: ",")
+        
+
+
+
+         let popupVC = storyboard?.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
+        popupVC.filtercategoryId = filtercategoryId
+        popupVC.setcategoryFilter = setcategoryFilter
+
+        present(popupVC, animated: true, completion: nil)
+        
+
 
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,14 +111,17 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell   = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
         cell.lblTitle.text = array[indexPath.row].category_name
+        cell.selectionStyle = .none
         
         let id = array[indexPath.row].category_id
         let strid = Int(id)
 
         if arrSelectedRows.contains(strid!){
-            cell.btnSelect.setBackgroundImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+            getcategoryId = String(describing: strid)
+            print(getcategoryId)
+            cell.btnSelect.setBackgroundImage(UIImage(named:"Layer 1144"), for: .normal)
         }else{
-            cell.btnSelect.setBackgroundImage(UIImage(named:"Radiobtn"), for: .normal)
+            cell.btnSelect.setBackgroundImage(UIImage(named:"Layer 1143"), for: .normal)
         }
         cell.btnSelect.tag = strid!
         cell.btnSelect.addTarget(self, action: #selector(checkBoxSelection(_:)), for: .touchUpInside)
@@ -99,24 +134,32 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     {
 
         if self.arrSelectedRows.contains(sender.tag){
+            
             self.arrSelectedRows.remove(at: self.arrSelectedRows.index(of: sender.tag)!)
         }else{
+
+            let value = String(describing: sender.tag)
             self.arrSelectedRows.append(sender.tag)
+            categoryFilterArray.append(CategoryFilter(categoryId: value))
+
+
             
-            print(arrSelectedRows)
 
         }
         self.tableView.reloadData()
     }
+    
+    
 
     
     /// categorylist Api
     func getCategoryList() {
         KRProgressHUD.show()
-        Alamofire.request(AppURL.getcategories , method: .get).responseJSON
+        let id = "/" + getcategoryId
+        Alamofire.request(AppURL.getcategories, method: .get).responseJSON
             { [self] response in
                 
-
+                print(response)
                 
                 if let result = response.result.value {
                     if response.result.isSuccess {
@@ -147,6 +190,7 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
                             print(category_id)
                             let category_name = (user as AnyObject).value(forKey: AppURL.categoryName) as! String
                             self.array.append(Category(category_id: category_id, category_name: category_name))
+                            
                         }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
@@ -156,6 +200,41 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
                 }
             }
     }
+    
+    
+    /// subcategorylist Api
+    /// parmaeters categoryId
+    func getSubCategoryList(categoryId:String) {
+        KRProgressHUD.show()
+        let id = "/" + categoryId
+        Alamofire.request(AppURL.getsubcategoriescollections + id , method: .get).responseJSON
+            { [self] response in
+                
+
+                
+                if let result = response.result.value {
+                    if response.result.isSuccess {
+                        
+
+                    
+                        let statusCode = response.response!.statusCode
+                        
+                        KRProgressHUD.dismiss()
+                        
+                        let subcategoryId1 = (result as AnyObject).value(forKey: AppURL.subcategoryId) as AnyObject
+                        self.getsubcategoryId = String(describing: subcategoryId1)
+
+
+                        dismiss(animated: true, completion: nil)
+
+
+                    
+                        
+                    }
+                }
+            }
+    }
+
 
 }
 
