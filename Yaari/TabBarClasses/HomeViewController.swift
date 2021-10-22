@@ -99,6 +99,8 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         let btnFavorite = UIButton.init(type: .custom)
         btnFavorite.setImage(UIImage(named: "favorites"), for: .normal)
+        btnFavorite.addTarget(self, action:#selector(self.favoriteButtonPressed) , for: .touchUpInside)
+
         // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
         
         let btnNotification = UIButton.init(type: .custom)
@@ -122,12 +124,23 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         self.title = "Home"
         
     }
+    @objc func favoriteButtonPressed() {
+        let vc = storyboard?.instantiateViewController(identifier: "WishListHomeViewController") as! WishListHomeViewController
+        vc.fromSharedCatalogue = false
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func cartButtonPressed() {
         let vc = storyboard?.instantiateViewController(identifier: "CartViewController") as! CartViewController
         navigationController?.pushViewController(vc, animated: true)
         
     }
     @objc func btnMenuAction() {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "NewMenuViewController") as! NewMenuViewController
+        navigationController?.pushViewController(vc, animated: true)
+        
+        /*
         let menu = storyboard!.instantiateViewController(withIdentifier: "SideMenuNavigation") as! SideMenuNavigationController
         var set = SideMenuSettings()
         set.presentationStyle = SideMenuPresentationStyle.menuSlideIn
@@ -136,6 +149,8 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         set.statusBarEndAlpha = 0
         menu.settings = set
         present(menu, animated: true, completion: nil)
+ */
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count:Int!

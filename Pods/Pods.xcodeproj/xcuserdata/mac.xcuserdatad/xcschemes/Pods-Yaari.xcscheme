@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "836CF4C6C52E120928552351095D4E31"
-               BuildableName = "Pods_Yaari.framework"
+               BuildableName = "libPods-Yaari.a"
                BlueprintName = "Pods-Yaari"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
