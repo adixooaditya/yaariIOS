@@ -22,6 +22,7 @@
 		042425432722D7F900304C25 /* WishListHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042425412722D7F900304C25 /* WishListHomeViewController.swift */; };
 		042425442722D7F900304C25 /* WishListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042425422722D7F900304C25 /* WishListTableViewCell.swift */; };
 		042425472722E00B00304C25 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042425462722E00B00304C25 /* EditProfileViewController.swift */; };
+		0424254A27232C2700304C25 /* CustomPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424254927232C2700304C25 /* CustomPopupViewController.swift */; };
 		0447679D26E0EC070023A555 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447679C26E0EC060023A555 /* GenderViewController.swift */; };
 		044BBC2C26B9A9B4007426EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BBC2B26B9A9B4007426EE /* LoginViewController.swift */; };
 		045183942715E115003B9B9E /* NewMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045183932715E115003B9B9E /* NewMenuViewController.swift */; };
@@ -88,6 +89,7 @@
 		042425412722D7F900304C25 /* WishListHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListHomeViewController.swift; sourceTree = "<group>"; };
 		042425422722D7F900304C25 /* WishListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListTableViewCell.swift; sourceTree = "<group>"; };
 		042425462722E00B00304C25 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		0424254927232C2700304C25 /* CustomPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupViewController.swift; sourceTree = "<group>"; };
 		0447679C26E0EC060023A555 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
 		044BBC2B26B9A9B4007426EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		045183932715E115003B9B9E /* NewMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				041CFEB5271D7C97005C8BD2 /* FAQViewController.swift */,
 				041CFEB8271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift */,
 				042425462722E00B00304C25 /* EditProfileViewController.swift */,
+				0424254927232C2700304C25 /* CustomPopupViewController.swift */,
 			);
 			path = SideMenuClasses;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				044BBC2C26B9A9B4007426EE /* LoginViewController.swift in Sources */,
 				04D6366826B3093000C0C04B /* ViewController.swift in Sources */,
 				046499CC26BC0BE00017EB9E /* MenuViewController.swift in Sources */,
+				0424254A27232C2700304C25 /* CustomPopupViewController.swift in Sources */,
 				04CD951226BC6142002BEB32 /* Constants.swift in Sources */,
 				04D1ECCE26E8D1BC00BA4D36 /* SelectStateCityViewController.swift in Sources */,
 				042425472722E00B00304C25 /* EditProfileViewController.swift in Sources */,

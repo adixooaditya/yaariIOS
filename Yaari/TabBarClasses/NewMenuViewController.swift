@@ -41,6 +41,14 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
         navigationController?.popViewController(animated: true)
     }
     @IBAction func btnLogoutAction(_ sender: Any) {
+        let alertVc = self.storyboard?.instantiateViewController(withIdentifier: "CustomPopupViewController") as!
+            CustomPopupViewController
+      
+        alertVc.modalPresentationStyle = .custom
+        alertVc.modalTransitionStyle = .crossDissolve
+        present(alertVc, animated: true, completion: nil)
+        
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayMenu.count

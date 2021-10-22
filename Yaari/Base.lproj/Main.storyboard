@@ -5995,6 +5995,105 @@
             </objects>
             <point key="canvasLocation" x="4470" y="2614"/>
         </scene>
+        <!--Custom Popup View Controller-->
+        <scene sceneID="WZx-SY-8dU">
+            <objects>
+                <viewController storyboardIdentifier="CustomPopupViewController" id="XGI-8J-A1C" customClass="CustomPopupViewController" customModule="Yaari" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="atr-1v-hyi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SE-BP-uDv">
+                                <rect key="frame" x="22" y="230" width="331" height="207"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wk-LC-CnJ">
+                                        <rect key="frame" x="0.0" y="25" width="331" height="35"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="25"/>
+                                        <color key="textColor" red="0.96470588239999999" green="0.12941176469999999" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to Logout?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfB-5y-XhC">
+                                        <rect key="frame" x="0.0" y="80" width="331" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="8cX-X2-Ana"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                        <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aGv-7n-YvU">
+                                        <rect key="frame" x="70" y="130" width="191" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oe-0t-cG3">
+                                                <rect key="frame" x="0.0" y="0.0" width="90.5" height="35"/>
+                                                <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                <state key="normal" title="Yes">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="btnYesAction:" destination="XGI-8J-A1C" eventType="touchUpInside" id="ZrO-21-TWl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGQ-Fp-1dX">
+                                                <rect key="frame" x="100.5" y="0.0" width="90.5" height="35"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="btnCancelAction:" destination="XGI-8J-A1C" eventType="touchUpInside" id="sm4-X9-1kU"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="HfB-5y-XhC" firstAttribute="leading" secondItem="5wk-LC-CnJ" secondAttribute="leading" id="4BC-qV-OmI"/>
+                                    <constraint firstAttribute="trailing" secondItem="aGv-7n-YvU" secondAttribute="trailing" constant="70" id="5ky-kg-O49"/>
+                                    <constraint firstItem="5wk-LC-CnJ" firstAttribute="leading" secondItem="3SE-BP-uDv" secondAttribute="leading" id="5wM-OG-Vvd"/>
+                                    <constraint firstItem="HfB-5y-XhC" firstAttribute="trailing" secondItem="5wk-LC-CnJ" secondAttribute="trailing" id="Nox-XL-LFm"/>
+                                    <constraint firstAttribute="trailing" secondItem="5wk-LC-CnJ" secondAttribute="trailing" id="RSn-oi-9tC"/>
+                                    <constraint firstAttribute="trailing" secondItem="5wk-LC-CnJ" secondAttribute="trailing" id="Wc3-oX-Eym"/>
+                                    <constraint firstItem="HfB-5y-XhC" firstAttribute="top" secondItem="5wk-LC-CnJ" secondAttribute="bottom" constant="20" id="iPR-0r-AVn"/>
+                                    <constraint firstItem="5wk-LC-CnJ" firstAttribute="leading" secondItem="3SE-BP-uDv" secondAttribute="leading" id="qLS-gU-kSe"/>
+                                    <constraint firstItem="5wk-LC-CnJ" firstAttribute="top" secondItem="3SE-BP-uDv" secondAttribute="top" constant="25" id="qah-j3-HB7"/>
+                                    <constraint firstItem="aGv-7n-YvU" firstAttribute="top" secondItem="HfB-5y-XhC" secondAttribute="bottom" constant="29" id="syx-hC-Mxr"/>
+                                    <constraint firstItem="aGv-7n-YvU" firstAttribute="leading" secondItem="3SE-BP-uDv" secondAttribute="leading" constant="70" id="z0T-Dz-6dq"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="y36-xy-gtC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3SE-BP-uDv" firstAttribute="top" secondItem="y36-xy-gtC" secondAttribute="top" constant="230" id="LHl-u2-ZBX"/>
+                            <constraint firstItem="y36-xy-gtC" firstAttribute="bottom" secondItem="3SE-BP-uDv" secondAttribute="bottom" constant="230" id="MyJ-84-PH8"/>
+                            <constraint firstItem="3SE-BP-uDv" firstAttribute="leading" secondItem="y36-xy-gtC" secondAttribute="leading" constant="22" id="Xdc-le-e1g"/>
+                            <constraint firstItem="y36-xy-gtC" firstAttribute="trailing" secondItem="3SE-BP-uDv" secondAttribute="trailing" constant="22" id="xYw-aK-vi7"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Df-MW-vHc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5141.6000000000004" y="2613.6431784107949"/>
+        </scene>
         <!--Wish List Home View Controller-->
         <scene sceneID="7vI-EM-mar">
             <objects>
