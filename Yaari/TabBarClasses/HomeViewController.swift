@@ -19,8 +19,8 @@ struct CategoryList {
     var category_id:String
     var category_name: String
     var category_image: String
-
-
+    
+    
 }
 
 struct subCategoryList {
@@ -28,25 +28,25 @@ struct subCategoryList {
     var subcategory_id:String
     var subcategory_name: String
     var subcategory_des: String
-
+    
     var subcategory_image: String
-
-
+    
+    
 }
 
 
 class HomeViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
+    
     @IBOutlet weak var collectionViewBottom: UICollectionView!
     @IBOutlet weak var pageControl: ScrollingPageControl!
     @IBOutlet weak var collectionViewEssential: UICollectionView!
     @IBOutlet weak var collectionViewTop: UICollectionView!
     var topArray = [CategoryList]()
-   // let bottomArray = ["Bra & Lingerie","Clothing Sets","Earings","T-shirts","Gadgets","Home & Kitchen"]
-   var  bottomArray = [subCategoryList]()
+    // let bottomArray = ["Bra & Lingerie","Clothing Sets","Earings","T-shirts","Gadgets","Home & Kitchen"]
+    var  bottomArray = [subCategoryList]()
     let bottomArrayImages = ["lingeries","clothingsets","earings","demoImg","gadgets","homeKitchen"]
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialization()
@@ -63,7 +63,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         print("cell width \(cellWidth)")
         let cellheight : CGFloat = 200.0 //collectionViewBottom.frame.size.height / 3.0
         let cellSize = CGSize(width: cellWidth , height:cellheight)
-
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical //.horizontal
         layout.itemSize = cellSize
@@ -71,13 +71,13 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         layout.minimumLineSpacing = 10.0
         layout.minimumInteritemSpacing = 5.0
         collectionViewBottom.setCollectionViewLayout(layout, animated: true)
-
+        
         collectionViewBottom.reloadData()
         
         getCategoryList()
         getSubCategoryList()
-
-
+        
+        
     }
     func setupPageControl() {
         pageControl.backgroundColor = .clear
@@ -91,36 +91,36 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         collectionViewEssential.isPagingEnabled = false
     }
     func setupNavigationBar() {
-
+        
         let button1 = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action:  #selector(btnMenuAction))
         // action:#selector(Class.MethodName) for swift 3
         self.navigationItem.leftBarButtonItem  = button1
-       
+        
         
         let btnFavorite = UIButton.init(type: .custom)
         btnFavorite.setImage(UIImage(named: "favorites"), for: .normal)
-           // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
-
+        // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
+        
         let btnNotification = UIButton.init(type: .custom)
         btnNotification.setImage(UIImage(named: "notifications"), for: .normal)
-            //btnEdit.addTarget(self, action: #selector(MyPageContainerViewController.editButtonPressed), for: .touchUpInside)
+        //btnEdit.addTarget(self, action: #selector(MyPageContainerViewController.editButtonPressed), for: .touchUpInside)
         
         let btnCart = UIButton.init(type: .custom)
         btnCart.setImage(UIImage(named: "cart"), for: .normal)
         btnCart.addTarget(self, action: #selector(HomeViewController.cartButtonPressed), for: .touchUpInside)
-
+        
         let stackview = UIStackView.init(arrangedSubviews: [btnFavorite,btnNotification,btnCart])
         stackview.distribution = .equalSpacing
         stackview.axis = .horizontal
         stackview.alignment = .center
         stackview.spacing = 10
-
+        
         let rightBarButton = UIBarButtonItem(customView: stackview)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
-         self.title = "Home"
-
+        self.title = "Home"
+        
     }
     @objc func cartButtonPressed() {
         let vc = storyboard?.instantiateViewController(identifier: "CartViewController") as! CartViewController
@@ -155,31 +155,31 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
             return essentialCell
         }
         else if collectionView == collectionViewTop {
-        let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCell", for: indexPath)
-        let imageView = topCell.contentView.viewWithTag(101) as! UIImageView
+            let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: "topCell", for: indexPath)
+            let imageView = topCell.contentView.viewWithTag(101) as! UIImageView
             let getString = topArray[indexPath.row].category_image
             let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
             imageView.contentMode  = .scaleAspectFit
-
+            
             imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: ""), options: .forceTransition, progress: nil, completed: nil)
-
-
+            
+            
             //imageView.image = UIImage.init(named: getUrl)
-        let lblName = topCell.contentView.viewWithTag(102) as! UILabel
+            let lblName = topCell.contentView.viewWithTag(102) as! UILabel
             lblName.text = topArray[indexPath.row].category_name
-
-        return topCell
+            
+            return topCell
         }
         else if collectionView == collectionViewBottom {
             let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: "bottomCell", for: indexPath)
             let imageView = bottomCell.contentView.viewWithTag(101) as! UIImageView
-           // imageView.image = UIImage.init(named: bottomArrayImages[indexPath.row])
+            // imageView.image = UIImage.init(named: bottomArrayImages[indexPath.row])
             
             let getString = bottomArray[indexPath.row].subcategory_image
             let getUrl = getString.replacingOccurrences(of: AppURL.blankSpace, with: AppURL.perTwenty, options: NSString.CompareOptions.literal, range: nil)
-
+            
             imageView.sd_setImage(with:URL(string:getUrl), placeholderImage: UIImage(named: "demoImg"), options: .forceTransition, progress: nil, completed: nil)
-
+            
             
             
             imageView.contentMode  = .scaleAspectFit
@@ -188,7 +188,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
             
             let lbldes = bottomCell.contentView.viewWithTag(103) as! UILabel
             lbldes.text = bottomArray[indexPath.row].subcategory_des
-
+            
             return bottomCell
         }
         else {
@@ -201,12 +201,15 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         switch collectionView {
         case collectionViewTop:
             vc.titleStr = topArray[indexPath.row].category_name
-            vc.getcategoryId = topArray[indexPath.row].category_id
-
+           
+            
+            vc.getfiltercategoryId = topArray[indexPath.row].category_id
+            
         case collectionViewBottom:
             vc.titleStr = bottomArray[indexPath.row].subcategory_name
             vc.getsubcategory_id = bottomArray[indexPath.row].subcategory_id
-
+            vc.setcategoryFilter = "3"
+            
         default:
             vc.titleStr = "Product"
         }
@@ -214,20 +217,20 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-   
-       let page = round(scrollView.contentOffset.x / scrollView.frame.width)
+        
+        let page = round(scrollView.contentOffset.x / scrollView.frame.width)
         print(page)
-       pageControl.selectedPage = Int(page)
-       
-           
-            
-       }
-
+        pageControl.selectedPage = Int(page)
+        
+        
+        
+    }
+    
     
     class CollectionViewFlowLayout: UICollectionViewFlowLayout
     {
         
-
+        
         
         override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint
         {
@@ -256,7 +259,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
                             continue
                         }
                     }
-
+                    
                     if candidateAttribute != nil
                     {
                         return CGPoint(x: candidateAttribute!.center.x - halfWidthOfVC, y: proposedContentOffset.y);
@@ -269,84 +272,84 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         //should be 0<fade<1
         private let fadeFactor: CGFloat = 1.0
         private let cellHeight : CGFloat = 211
-
+        
         required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
-
+        
         init(scrollDirection:UICollectionView.ScrollDirection) {
             super.init()
             self.scrollDirection = scrollDirection
-
+            
         }
-
+        
         override func prepare() {
             setupLayout()
             super.prepare()
         }
-
+        
         func setupLayout() {
             let cellWidth =  UIScreen.main.bounds.width
             self.itemSize = CGSize(width: cellWidth,height:cellHeight)
             self.minimumLineSpacing = 0
         }
-
+        
         override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
             return true
         }
-
+        
         func scrollDirectionOver() -> UICollectionView.ScrollDirection {
             return UICollectionView.ScrollDirection.vertical
         }
-
+        
         //appear and disappear at 0
         override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
             let attributes = super.layoutAttributesForItem(at: itemIndexPath)! as UICollectionViewLayoutAttributes
             attributes.alpha = 0
             return attributes
         }
-
+        
         override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
             let attributes = super.layoutAttributesForItem(at: itemIndexPath)! as UICollectionViewLayoutAttributes
             attributes.alpha = 0
             return attributes
         }
-
+        
         
     }
-
+    
     /// categorylist Api
     func getCategoryList() {
         KRProgressHUD.show()
         Alamofire.request(AppURL.getCategorycollections , method: .get).responseJSON
-            { [self] response in
-                
-
-                
-                if let result = response.result.value {
-                    if response.result.isSuccess {
-                        
-                        let JSON = result as! NSArray
-
+        { [self] response in
+            
+            
+            
+            if let result = response.result.value {
+                if response.result.isSuccess {
                     
-                        let statusCode = response.response!.statusCode
-                        
-                        KRProgressHUD.dismiss()
-
-                        self.topArray.removeAll()
-                        
-
+                    let JSON = result as! NSArray
                     
+                    
+                    let statusCode = response.response!.statusCode
+                    
+                    KRProgressHUD.dismiss()
+                    
+                    self.topArray.removeAll()
+                    
+                    
+                    
+                    
+                    if(JSON != nil){
                         
-                        if(JSON != nil){
-
-
-
+                        
+                        
                         for user in JSON
                         {
                             
-                           print(user)
-
+                            print(user)
+                            
                             let category_id1 = (user as AnyObject).value(forKey: AppURL.categoryId) as AnyObject
                             let category_id = String(describing: category_id1)
                             print(category_id)
@@ -357,52 +360,52 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
                         DispatchQueue.main.async {
                             self.collectionViewTop.reloadData()
                         }
-                        }
                     }
                 }
             }
+        }
     }
     
     /// subcategorylist Api
     func getSubCategoryList() {
         KRProgressHUD.show()
         Alamofire.request(AppURL.getsubcategoriescollections , method: .get).responseJSON
-            { [self] response in
-                
-
-                
-                if let result = response.result.value {
-                    if response.result.isSuccess {
-                        
-                        let JSON = result as! NSArray
-
+        { [self] response in
+            
+            
+            
+            if let result = response.result.value {
+                if response.result.isSuccess {
                     
-                        let statusCode = response.response!.statusCode
-                        
-                        KRProgressHUD.dismiss()
-
-                        self.bottomArray.removeAll()
-                        
-
+                    let JSON = result as! NSArray
                     
+                    
+                    let statusCode = response.response!.statusCode
+                    
+                    KRProgressHUD.dismiss()
+                    
+                    self.bottomArray.removeAll()
+                    
+                    
+                    
+                    
+                    if(JSON != nil){
                         
-                        if(JSON != nil){
-
-
-
+                        
+                        
                         for user in JSON
                         {
                             
-                           print(user)
-
-
+                            print(user)
+                            
+                            
                             let subcategoryId1 = (user as AnyObject).value(forKey: AppURL.subcategoryId) as AnyObject
                             let subcategoryId = String(describing: subcategoryId1)
                             let subcategoryName = (user as AnyObject).value(forKey: AppURL.subcategoryName) as! String
                             let subdescription = (user as AnyObject).value(forKey: AppURL.subdescription) as! String
                             
                             var subcategorybanners = String()
-
+                            
                             if let subcategorybanners1 = (user as AnyObject).value(forKey: AppURL.subcategorybanners) as? String{
                                 subcategorybanners = subcategorybanners1
                             }else{
@@ -413,11 +416,11 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
                         DispatchQueue.main.async {
                             self.collectionViewBottom.reloadData()
                         }
-                        }
                     }
                 }
             }
+        }
     }
-
-
+    
+    
 }

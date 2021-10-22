@@ -14,10 +14,13 @@ import Alamofire
 import KRProgressHUD
 
 
+protocol FiltersViewControllerDelegate {
+    func sendData(setcategoryFilter: String,selectValueArray:[Int],collecstionId:String)
+    
+   }
 
 
-
-class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
+class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITableViewDataSource{
     @IBOutlet weak var tableView: UITableView!
     var height: CGFloat?
     var topCornerRadius: CGFloat?
@@ -45,17 +48,26 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
     var searching = false
     
     var searchedCategoryArray = [String]()
- 
-
+    
+    
+    
+    
+    
+    
+    var selectValueArray = [String]()
+    
+  
+    var userSetFilterArray = [Int]()
+    
+    var delegate: FiltersViewControllerDelegate?
+    var getcollecstionId = String()
 
 
 
     
-    var selectValueArray = [String]()
-
-
-
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -63,13 +75,12 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
         tableViewFilter.delegate = self
         tableViewFilter.dataSource = self
         
-
-        self.searchBar.delegate = self
-
         
-
-
-
+        self.searchBar.delegate = self
+        
+      
+      
+        
         getCategoryList()
     }
     
@@ -83,59 +94,92 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
     
     override var popupShouldDismissInteractivelty: Bool { return shouldDismissInteractivelty ?? true }
     
-   // override var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
+    // override var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     @IBAction func btnCloseAction(_ sender: Any) {
-      
-        dismiss(animated: true, completion: nil)
-
-    }
-    @IBAction func btnApplyAction(_ sender: Any) {
         
-      
-
-
-       let filtercategoryId = selectValueArray.joined(separator: ",")
-        print(filtercategoryId)
-
-
-//
-//
-//         let popupVC = storyboard?.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
-//        popupVC.filtercategoryId = filtercategoryId
-//        popupVC.setcategoryFilter = setcategoryFilter
-//
-//        present(popupVC, animated: true, completion: nil)
-       // dismiss(animated: true, completion: nil)
-
+        dismiss(animated: true, completion: nil)
+        
     }
     
+    
+    func jsonToString(json: AnyObject){
+        do {
+            let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) // first of all convert json to the data
+            let convertedString = String(data: data1, encoding: String.Encoding.utf8) // the data will be converted to the string
+            print(convertedString ?? "defaultvalue")
+        } catch let myJSONError {
+            print(myJSONError)
+        }
+        
+    }
+   
+    @IBAction func btnApplyAction(_ sender: Any) {
+       
+        
+        
+        if setIndex == 0{
+        let filtercategoryId = selectValueArray.joined(separator: ",")
+        print(filtercategoryId)
+        }else{
+          
+            print(selectValueArray)
+        
+        var setcategoryFilter = "2"
+        
+        
+        
+       
+        
+            self.delegate?.sendData(setcategoryFilter: setcategoryFilter, selectValueArray: userSetFilterArray, collecstionId: getcollecstionId)
+            self.presentingViewController!.dismiss(animated: true, completion: nil)
 
+        
+          
+//       print(userSetFilterArray)
+//
+//                 let popupVC = storyboard?.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
+//                popupVC.priceFilterArray = userSetFilterArray
+//                popupVC.setcategoryFilter = setcategoryFilter
+//
+//                present(popupVC, animated: true, completion: nil)
+        }
+      
+        
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count:Int!
+        var strcount = Int()
         if tableView == self.tableViewFilter {
-            count = arrayFilter.count
+            strcount = arrayFilter.count
         }
-        else if tableView == self.tableView {
-           
-                if searching {
-                    count = searchedCategoryArray.count
-                }else{
-                count = arrayName.count
-                }
+        else{
             
-           
+            if  searchBar.text != "" {
+                strcount = searchedCategoryArray.count
+                
+            }
+            else{
+                
+                strcount = arrayName.count
+                
+                
+                
+            }
+            
+            
         }
-        return count
+        return strcount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,40 +189,90 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
             cell.lblTitle.text = arrayFilter[indexPath.row]
             cellToReturn = cell
         }
-        else if tableView == self.tableView {
-        let cell   = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
-          
+        else {
+            let cell   = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
+            
+            
+            if  searchBar.text != "" {
+                cell.lblTitle.text = searchedCategoryArray[indexPath.row]
                 
-                if searching {
-                    cell.lblTitle.text = searchedCategoryArray[indexPath.row]
-                  
+                
+                
+                
+                
+                if setIndex == 2{
                     
-                  
-                        cell.btnSelect.backgroundColor = .clear
-
-
-                  
-                        cellToReturn = cell
-                }else{
-            cell.lblTitle.text = arrayName[indexPath.row]
-                    
-                    print(cell.lblTitle.text)
-          
-            
-          
-                cell.btnSelect.backgroundColor = .clear
-
-
-          
-                cellToReturn = cell
+                    cell.btnSelect.setImage(UIImage(named:""), for: .normal)
+                    cell.btnSelect.backgroundColor = hexStringToUIColor(hex: categoryColor[indexPath.row])
+                }else  if setIndex == 3{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                    cell.btnSelect.backgroundColor = .clear
                 }
+                else  if setIndex == 4{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                    cell.btnSelect.backgroundColor = .clear
+                }else  if setIndex == 5{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                    cell.btnSelect.backgroundColor = .clear
+                }
+                
+                else{
+                    cell.btnSelect.backgroundColor = .clear
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
+                  
+//                    if setIndex == 0{
+//                        self.tableView.allowsMultipleSelection = true
+//
+//                    }
+                }
+                
+                
+                
+                
+            }else{
+                print(arrayName.count)
+                cell.lblTitle!.text! = arrayName[indexPath.row]
+                
+                print(cell.lblTitle!.text!)
+                
+                
+                
+                if setIndex == 2{
+                    cell.btnSelect.setImage(UIImage(named:""), for: .normal)
+                    cell.btnSelect.backgroundColor = hexStringToUIColor(hex: categoryColor[indexPath.row])
+                }else  if setIndex == 3{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                    cell.btnSelect.backgroundColor = .clear
+                }
+                else  if setIndex == 4{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                    cell.btnSelect.backgroundColor = .clear
+                }else  if setIndex == 5{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                    cell.btnSelect.backgroundColor = .clear
+                }
+                
+                else{
+                    cell.btnSelect.backgroundColor = .clear
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
+//                    if setIndex == 0{
+//                        self.tableView.allowsMultipleSelection = true
+//
+//                    }
+                    
+                }
+                
+                
+                
+                
+            }
+            
+            cellToReturn = cell
             
             
-           
-
         }
         return  cellToReturn
-
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableViewFilter {
@@ -188,10 +282,11 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
             }
             else if indexPath.row == 1{
                 setIndex = 1
+                getFabricList()
             }
-
+            
             else if indexPath.row == 2{
-                arrayName.removeAll()
+                setIndex = 2
                 getColorList()
             }
             else if indexPath.row == 3{
@@ -210,9 +305,10 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
             else if indexPath.row == 6{
                 setIndex = 6
             }
-
+            
             else if indexPath.row == 7{
                 setIndex = 7
+                getMaterialList()
             }
             else if indexPath.row == 8{
                 setIndex = 8
@@ -223,38 +319,148 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
             else if indexPath.row == 10{
                 setIndex = 10
             }
-
-        }else if tableView == self.tableView{
+            
+        }else {
             let cell = tableView.cellForRow(at: indexPath) as!SortTableViewCell
-
             if setIndex == 0{
-                let id = categoryId[indexPath.row]
-                selectValueArray.append(id)
-                cell.btnSelect.setImage(UIImage(named:"Layer 1144"), for: .normal)
-             
-            }else if setIndex == 1{
-             
-            }else if setIndex == 2{
-             
+                if searchBar.text != "" {
+                    selectValueArray.removeAll()
+                    let id = categoryId[indexPath.row]
+                    selectValueArray.append(id)
+                    
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1144"), for: .normal)
+                    
+                    
+                    
+                    
+                    
+                    
+                }else{
+                    selectValueArray.removeAll()
+                    let id = categoryId[indexPath.row]
+                    selectValueArray.append(id)
+                    
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1144"), for: .normal)
+                    
+                    
+                }
+                
             }
-
-           else if setIndex == 3{
-                
-                cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
-
-                
+            else if setIndex == 2{
+                if searchBar.text != "" {
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:""), for: .normal)
+                    
+                    
+                    
+                    //radio-on-button (1)
+                    
+                    
+                }else{
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:""), for: .normal)
+                    
+                    
+                }
+            }
+            else if setIndex == 3{
+                if searchBar.text != "" {
+                    
+                    if indexPath.row == 0{
+                       
+                        userSetFilterArray = [0,500]
+                    }else  if indexPath.row == 1{
+                        userSetFilterArray = [500,750]
+                    }else  if indexPath.row == 2{
+                        userSetFilterArray = [750,1000]
+                    }else  if indexPath.row == 3{
+                        userSetFilterArray = [1000,1500]
+                    }else  if indexPath.row == 4{
+                        userSetFilterArray = [1500]
+                    }
+                   
+                    cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+                    
+                    
+                    
+                    //radio-on-button (1)
+                    
+                    
+                }else{
+                    
+                    selectValueArray.removeAll()
+                    if indexPath.row == 0{
+                       
+                        userSetFilterArray = [0,500]
+                    }else  if indexPath.row == 1{
+                        userSetFilterArray = [500,750]
+                    }else  if indexPath.row == 2{
+                        userSetFilterArray = [750,1000]
+                    }else  if indexPath.row == 3{
+                        userSetFilterArray = [1000,1500]
+                    }else  if indexPath.row == 4{
+                        userSetFilterArray = [1500]
+                    }
+                    cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+                    
+                    
+                }
             }
             else if setIndex == 4{
-
-                cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
-
-                
+                if searchBar.text != "" {
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+                    
+                    
+                    
+                    //radio-on-button (1)
+                    
+                    
+                }else{
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+                    
+                    
+                }
             }
             else if setIndex == 5{
-
-                cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
-
-                
+                if searchBar.text != "" {
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+                    
+                    
+                    
+                    
+                    
+                }else{
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:"radio-on-button (1)"), for: .normal)
+                    
+                    
+                }
+            }else{
+                if searchBar.text != "" {
+                    
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1144"), for: .normal)
+                    
+                    
+                    
+                    
+                    
+                    
+                }else{
+                    
+                    
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1144"), for: .normal)
+                    
+                    
+                }
             }
         }
         
@@ -263,144 +469,194 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
         if tableView == self.tableViewFilter {
             
         }
-        else if tableView == self.tableView{
-        let cell = tableView.cellForRow(at: indexPath) as!SortTableViewCell
+        else {
+            let cell = tableView.cellForRow(at: indexPath) as!SortTableViewCell
             if setIndex == 0{
-               
-            cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
-             
-            }else if setIndex == 1{
-                
-               // cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
-                 
+                if searchBar.text != "" {
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
                 }
-            else  if setIndex == 2{
-                
-               // cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
-                 
+                else{
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
                 }
-
-       else if setIndex == 3{
-            cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
-
-
-        }else if setIndex == 4{
-            cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
-
-
+            }
+            else if setIndex == 2{
+                if searchBar.text != "" {
+                    cell.btnSelect.setImage(UIImage(named:""), for: .normal)
+                }
+                else{
+                    cell.btnSelect.setImage(UIImage(named:""), for: .normal)
+                }
+            }
+            else if setIndex == 3{
+                if searchBar.text != "" {
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                }
+                else{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                }
+            }
+            else if setIndex == 4{
+                if searchBar.text != "" {
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                }
+                else{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                }
+            }
+            else if setIndex == 5{
+                if searchBar.text != "" {
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                }
+                else{
+                    cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
+                }
+            }
+            
+            else {
+                if searchBar.text != "" {
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
+                }
+                else{
+                    cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
+                }
+            }
+            
+            
+            
         }
-        else if setIndex == 5{
-            cell.btnSelect.setImage(UIImage(named:"Radiobtn"), for: .normal)
-
-
-        }
-        }
-
+        
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    /// getMateriallist
+    func getMaterialList() {
+        searchedCategoryArray.removeAll()
+        arrayName.removeAll()
         
-        searchedCategoryArray = arrayName.filter { $0.lowercased().prefix(searchText.count) == searchText.lowercased() }
-        searching = true
-        tableView.reloadData()
         
         
-      
+        arrayName = ["Metal","Steel","Glass","Plastic","Aluminium","Texttile","Silcon","Copper","Paper","Timber","Iron"]
         
- 
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        
+        
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searching = false
-        searchBar.text = ""
-        tableView.reloadData()
-      
-    }
+    
+    /// getFabriclist
+    func getFabricList() {
+        searchedCategoryArray.removeAll()
+        arrayName.removeAll()
+        
+        
+        
+        arrayName = ["Denim","Velvet","Jeans","Damask","Tartan","Chiffon"]
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.allowsMultipleSelection = false
 
+            
+        }
+        
+        
+        
+    }
     
     
-    /// getPricelist Api
+    
+    /// getPricelist
     func getPriceList() {
         searchedCategoryArray.removeAll()
         arrayName.removeAll()
-       
-      
+        
+        
+        
         arrayName = ["Under ₹500","₹500 to ₹750","₹750 to ₹1000","₹1000 to ₹1500","Over ₹1500"]
-
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.tableView.allowsMultipleSelection = false
         }
-
-
+        
+        
+        
     }
-
     
-    /// getDisCountlist Api
+    
+    /// getDisCountlist
     func getDiscountList() {
         searchedCategoryArray.removeAll()
         arrayName.removeAll()
-       
+        
+        
         arrayName = ["10% Off or more","20% Off or more","30% Off or more","40% Off or more","50% Off or more","60% Off or more","70% Off or more","80% Off or more"]
-      
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-
-
+        
+        
+        
+        
+        self.tableView.reloadData()
+        self.tableView.allowsMultipleSelection = false
+        
+        
+        
     }
-    /// getSizetlist Api
+    /// getSizetlist
     func getSizeList() {
         searchedCategoryArray.removeAll()
         arrayName.removeAll()
-       
+        
         arrayName = ["S","M","L","XL","XXL"]
-       
-
+        
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.tableView.allowsMultipleSelection = false
         }
-
-
+        
+        
     }
-
+    
     
     
     /// getcolorlist Api
     func getColorList() {
         KRProgressHUD.show()
         Alamofire.request(AppURL.getcolors, method: .get).responseJSON
-            { [self] response in
-                
-                print(response)
-                
-                if let result = response.result.value {
-                    if response.result.isSuccess {
-                        
-                        let JSON = result as! NSArray
-
+        { [self] response in
+            
+            print(response)
+            
+            if let result = response.result.value {
+                if response.result.isSuccess {
                     
-                        let statusCode = response.response!.statusCode
-                        
-                        KRProgressHUD.dismiss()
-
-                        self.arrayName.removeAll()
-                        self.categoryId.removeAll()
-                        self.categoryColor.removeAll()
-                   
-                     
-                        
-
+                    let JSON = result as! NSArray
                     
+                    
+                    let statusCode = response.response!.statusCode
+                    
+                    KRProgressHUD.dismiss()
+                    
+                    self.arrayName.removeAll()
+                    self.categoryId.removeAll()
+                    self.categoryColor.removeAll()
+                    
+                    
+                    
+                    
+                    
+                    
+                    if(JSON != nil){
                         
-                        if(JSON != nil){
-
-
-
+                        
+                        
                         for user in JSON
                         {
                             
-                           print(user)
-
+                            print(user)
+                            
                             let id1 = (user as AnyObject).value(forKey: "id") as AnyObject
                             let id = String(describing: id1)
                             categoryId.append(id)
@@ -408,56 +664,57 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
                             
                             arrayName.append(name)
                             let hex = (user as AnyObject).value(forKey: "hex") as! String
-
+                            
                             categoryColor.append(hex)
                         }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
-                        }
+                            self.tableView.allowsMultipleSelection = false
                         }
                     }
                 }
             }
+        }
     }
-
+    
     
     /// categorylist Api
     func getCategoryList() {
         KRProgressHUD.show()
         let id = "/" + getcategoryId
         Alamofire.request(AppURL.getcategories, method: .get).responseJSON
-            { [self] response in
-                
-                print(response)
-                
-                if let result = response.result.value {
-                    if response.result.isSuccess {
-                        
-                        let JSON = result as! NSArray
-
+        { [self] response in
+            
+            print(response)
+            
+            if let result = response.result.value {
+                if response.result.isSuccess {
                     
-                        let statusCode = response.response!.statusCode
-                        
-                        KRProgressHUD.dismiss()
-
-                        self.arrayName.removeAll()
-                        self.categoryId.removeAll()
-                        self.categoryColor.removeAll()
-                     
-
-                        
-
+                    let JSON = result as! NSArray
                     
+                    
+                    let statusCode = response.response!.statusCode
+                    
+                    KRProgressHUD.dismiss()
+                    
+                    self.arrayName.removeAll()
+                    self.categoryId.removeAll()
+                    self.categoryColor.removeAll()
+                    
+                    
+                    
+                    
+                    
+                    
+                    if(JSON != nil){
                         
-                        if(JSON != nil){
-
-
-
+                        
+                        
                         for user in JSON
                         {
                             
-                           print(user)
-
+                            print(user)
+                            
                             let category_id1 = (user as AnyObject).value(forKey: AppURL.categoryId) as AnyObject
                             let category_id = String(describing: category_id1)
                             print(category_id)
@@ -469,13 +726,43 @@ class FiltersViewController: BottomPopupViewController,UITableViewDelegate,UITab
                         }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
-                        }
+                            self.tableView.allowsMultipleSelection = true
                         }
                     }
                 }
             }
+        }
     }
+    
+    
+}
 
-
+extension FiltersViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchedCategoryArray = arrayName.filter { $0.lowercased().prefix(searchText.count) == searchText.lowercased() }
+        searching = true
+        tableView.reloadData()
+        
+        
+        
+        
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        tableView.reloadData()
+        
+        
+        
+        
+        
+        
+    }
+    
+    
 }
 

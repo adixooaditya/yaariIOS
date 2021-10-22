@@ -16,16 +16,20 @@ struct Category {
     
     var category_id:String
     var category_name: String
-
-
+    
+    
 }
 
 struct CategoryFilter {
     
     var categoryId:String
-
-
+    
+    
 }
+protocol CategoryFilterViewControllerDelegate {
+    func messageData(setcategoryFilter: String,selectValueArray:[Int])
+    
+   }
 
 
 class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegate,UITableViewDataSource {
@@ -45,15 +49,21 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     
     var categoryFilterArray = [CategoryFilter]()
     var cateroryfilter = [String]()
+    var selectValueArray = [Int]()
+    
+    public static var userFilterCategoryId:String?
+    public static var userFilterCategorysetValue:String?
+
+    
+    var delegate: CategoryFilterViewControllerDelegate?
+
     
     
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getCategoryList()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -67,41 +77,30 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     
     override var popupShouldDismissInteractivelty: Bool { return shouldDismissInteractivelty ?? true }
     
-   // override var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
+    // override var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     @IBAction func btnCloseAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-
+        
     }
     @IBAction func btnApplyAction(_ sender: Any) {
         
-         var setcategoryFilter = "1"
+        var setcategoryFilter = "1"
         
         
-        var stringArray = arrSelectedRows.map { String($0) }
-
         
-       let filtercategoryId = stringArray.joined(separator: ",")
         
-
-
-
-         let popupVC = storyboard?.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
-        popupVC.filtercategoryId = filtercategoryId
-        popupVC.setcategoryFilter = setcategoryFilter
-
-        present(popupVC, animated: true, completion: nil)
-        
-
+        self.delegate?.messageData(setcategoryFilter: setcategoryFilter, selectValueArray: selectValueArray)
+        self.presentingViewController!.dismiss(animated: true, completion: nil)
 
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,80 +110,74 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell   = tableView.dequeueReusableCell(withIdentifier: "SortCell", for: indexPath) as! SortTableViewCell
         cell.lblTitle.text = array[indexPath.row].category_name
-        cell.selectionStyle = .none
         
-        let id = array[indexPath.row].category_id
-        let strid = Int(id)
-
-        if arrSelectedRows.contains(strid!){
-            getcategoryId = String(describing: strid)
-            print(getcategoryId)
-            cell.btnSelect.setBackgroundImage(UIImage(named:"Layer 1144"), for: .normal)
-        }else{
-            cell.btnSelect.setBackgroundImage(UIImage(named:"Layer 1143"), for: .normal)
-        }
-        cell.btnSelect.tag = strid!
-        cell.btnSelect.addTarget(self, action: #selector(checkBoxSelection(_:)), for: .touchUpInside)
-
+        
+        
+        
+        cell.btnSelect.backgroundColor = .clear
         return cell
         
     }
     
-    @objc func checkBoxSelection(_ sender:UIButton)
-    {
-
-        if self.arrSelectedRows.contains(sender.tag){
-            
-            self.arrSelectedRows.remove(at: self.arrSelectedRows.index(of: sender.tag)!)
-        }else{
-
-            let value = String(describing: sender.tag)
-            self.arrSelectedRows.append(sender.tag)
-            categoryFilterArray.append(CategoryFilter(categoryId: value))
-
-
-            
-
-        }
-        self.tableView.reloadData()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let cell = tableView.cellForRow(at: indexPath) as!SortTableViewCell
+        
+        let id = array[indexPath.row].category_id
+        selectValueArray.append(Int(id)!)
+        cell.btnSelect.setImage(UIImage(named:"Layer 1144"), for: .normal)
+        
+        
+        
+        
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath) as!SortTableViewCell
+        
+        cell.btnSelect.setImage(UIImage(named:"Layer 1143"), for: .normal)
+        
+        
+        
     }
     
     
-
+    
     
     /// categorylist Api
     func getCategoryList() {
         KRProgressHUD.show()
         let id = "/" + getcategoryId
         Alamofire.request(AppURL.getcategories, method: .get).responseJSON
-            { [self] response in
-                
-                print(response)
-                
-                if let result = response.result.value {
-                    if response.result.isSuccess {
-                        
-                        let JSON = result as! NSArray
-
+        { [self] response in
+            
+            print(response)
+            
+            if let result = response.result.value {
+                if response.result.isSuccess {
                     
-                        let statusCode = response.response!.statusCode
-                        
-                        KRProgressHUD.dismiss()
-
-                        self.array.removeAll()
-                        
-
+                    let JSON = result as! NSArray
                     
+                    
+                    let statusCode = response.response!.statusCode
+                    
+                    KRProgressHUD.dismiss()
+                    
+                    self.array.removeAll()
+                    
+                    
+                    
+                    
+                    if(JSON != nil){
                         
-                        if(JSON != nil){
-
-
-
+                        
+                        
                         for user in JSON
                         {
                             
-                           print(user)
-
+                            print(user)
+                            
                             let category_id1 = (user as AnyObject).value(forKey: AppURL.categoryId) as AnyObject
                             let category_id = String(describing: category_id1)
                             print(category_id)
@@ -195,10 +188,10 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
-                        }
                     }
                 }
             }
+        }
     }
     
     
@@ -208,33 +201,33 @@ class CategoryFilterViewController: BottomPopupViewController,UITableViewDelegat
         KRProgressHUD.show()
         let id = "/" + categoryId
         Alamofire.request(AppURL.getsubcategoriescollections + id , method: .get).responseJSON
-            { [self] response in
-                
-
-                
-                if let result = response.result.value {
-                    if response.result.isSuccess {
-                        
-
+        { [self] response in
+            
+            
+            
+            if let result = response.result.value {
+                if response.result.isSuccess {
                     
-                        let statusCode = response.response!.statusCode
-                        
-                        KRProgressHUD.dismiss()
-                        
-                        let subcategoryId1 = (result as AnyObject).value(forKey: AppURL.subcategoryId) as AnyObject
-                        self.getsubcategoryId = String(describing: subcategoryId1)
-
-
-                        dismiss(animated: true, completion: nil)
-
-
                     
-                        
-                    }
+                    
+                    let statusCode = response.response!.statusCode
+                    
+                    KRProgressHUD.dismiss()
+                    
+                    let subcategoryId1 = (result as AnyObject).value(forKey: AppURL.subcategoryId) as AnyObject
+                    self.getsubcategoryId = String(describing: subcategoryId1)
+                    
+                    
+                    dismiss(animated: true, completion: nil)
+                    
+                    
+                    
+                    
                 }
             }
+        }
     }
-
-
+    
+    
 }
 

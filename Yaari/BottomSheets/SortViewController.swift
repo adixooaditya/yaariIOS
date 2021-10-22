@@ -17,7 +17,7 @@ class SortViewController: BottomPopupViewController,UITableViewDelegate,UITableV
     let array = ["New Arrivals","Price (Low To High)","Price (High To Low)"]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -31,24 +31,24 @@ class SortViewController: BottomPopupViewController,UITableViewDelegate,UITableV
     
     override var popupShouldDismissInteractivelty: Bool { return shouldDismissInteractivelty ?? true }
     
-   // override var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
+    // override var popupDimmingViewAlpha: CGFloat { return BottomPopupConstants.kDimmingViewDefaultAlphaValue }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     @IBAction func btnCloseAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-
+        
     }
     @IBAction func btnApplyAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count

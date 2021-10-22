@@ -9,7 +9,7 @@ import UIKit
 import SideMenu
 
 class OrdersViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Orders"
@@ -21,30 +21,30 @@ class OrdersViewController: UIViewController {
         let button1 = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action:  #selector(btnMenuAction))
         // action:#selector(Class.MethodName) for swift 3
         self.navigationItem.leftBarButtonItem  = button1
-       
+        
         
         let btnFavorite = UIButton.init(type: .custom)
         btnFavorite.setImage(UIImage(named: "favorites"), for: .normal)
-           // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
-
+        // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
+        
         let btnNotification = UIButton.init(type: .custom)
         btnNotification.setImage(UIImage(named: "notifications"), for: .normal)
-            //btnEdit.addTarget(self, action: #selector(MyPageContainerViewController.editButtonPressed), for: .touchUpInside)
+        //btnEdit.addTarget(self, action: #selector(MyPageContainerViewController.editButtonPressed), for: .touchUpInside)
         
         let btnCart = UIButton.init(type: .custom)
         btnCart.setImage(UIImage(named: "cart"), for: .normal)
-
+        
         let stackview = UIStackView.init(arrangedSubviews: [btnFavorite,btnNotification,btnCart])
         stackview.distribution = .equalSpacing
         stackview.axis = .horizontal
         stackview.alignment = .center
         stackview.spacing = 10
-
+        
         let rightBarButton = UIBarButtonItem(customView: stackview)
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
-
+        
     }
     
     @objc func btnMenuAction() {
@@ -58,13 +58,13 @@ class OrdersViewController: UIViewController {
         present(menu, animated: true, completion: nil)
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

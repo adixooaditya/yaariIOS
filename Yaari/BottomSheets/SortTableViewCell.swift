@@ -10,8 +10,8 @@ import UIKit
 class SortTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var btnSelect: UIButton!
-
-
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,11 +22,11 @@ class SortTableViewCell: UITableViewCell {
         if selected {
             accessoryType = .none
         } else {
-          accessoryType = .none
+            accessoryType = .none
         }
-
+        
     }
-
-
-
+    
+    
+    
 }

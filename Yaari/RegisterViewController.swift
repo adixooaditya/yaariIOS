@@ -15,11 +15,11 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var btnNext: UIButton!
     var message = String()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         textFieldFirstName.setLeftPaddingPoints(10)
         textFieldLastName.setLeftPaddingPoints(10)
         textFieldEmail.setLeftPaddingPoints(10)
@@ -32,14 +32,14 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
-
+    
     @IBAction func btnNextAction(_ sender: Any) {
-       let getMobile = UserDefaults.standard.string(forKey: AppURL.setMobile)!
-
+        let getMobile = UserDefaults.standard.string(forKey: AppURL.setMobile)!
+        
         getRegister(Mobile:getMobile,firstName: textFieldFirstName.text!, lastName: textFieldLastName.text!, email: textFieldEmail.text!)
         
     }
-   
+    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if !textFieldFirstName.text!.isEmpty && !textFieldLastName.text!.isEmpty && !textFieldEmail.text!.isEmpty {
@@ -64,9 +64,9 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     /// - Parameter firstName
     /// - Parameter lastName
     /// - Parameter email
-
-
-
+    
+    
+    
     ///   Method Param
     /// - Parameter Mobile Number & referralcode
     func getRegister(Mobile: String,firstName:String,lastName:String,email:String) {
@@ -77,34 +77,34 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             AppURL.lastName:lastName,
             AppURL.email:email
         ]
-
+        
         print(parametersBal)
-
+        
         Alamofire.request(AppURL.usersRegister, method: .post, parameters: parametersBal).responseJSON { [self]
             response in
             print(response)
             if response.result.isSuccess {
                 if let result = response.result.value {
-
+                    
                     let statusCode = response.response!.statusCode
                     KRProgressHUD.dismiss()
                     print(statusCode)
-
+                    
                     if statusCode == 201 {
-
+                        
                         showDashboard()
-
+                        
                     } else {
                         self.message = (result as AnyObject).value(forKey: AppURL.message) as! String
-
-
-
+                        
+                        
+                        
                         AlertManager.ShowAlertWithOk(title: AppURL.Register, message: self.message,presentedViewController: self)
-
+                        
                     }
                 }
             }
         }
     }
-
+    
 }
