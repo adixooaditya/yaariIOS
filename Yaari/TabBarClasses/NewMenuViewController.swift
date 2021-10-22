@@ -32,7 +32,7 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     @IBAction func btnShowProfile(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
+        let vc = storyboard?.instantiateViewController(identifier: "EditProfileViewController") as! EditProfileViewController
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func backBtnAction() {
