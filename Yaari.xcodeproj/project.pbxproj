@@ -19,6 +19,8 @@
 		041CFEB3271D7C86005C8BD2 /* EarnAndLearnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEB2271D7C86005C8BD2 /* EarnAndLearnViewController.swift */; };
 		041CFEB6271D7C97005C8BD2 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEB5271D7C97005C8BD2 /* FAQViewController.swift */; };
 		041CFEB9271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041CFEB8271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift */; };
+		042425432722D7F900304C25 /* WishListHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042425412722D7F900304C25 /* WishListHomeViewController.swift */; };
+		042425442722D7F900304C25 /* WishListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042425422722D7F900304C25 /* WishListTableViewCell.swift */; };
 		0447679D26E0EC070023A555 /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447679C26E0EC060023A555 /* GenderViewController.swift */; };
 		044BBC2C26B9A9B4007426EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BBC2B26B9A9B4007426EE /* LoginViewController.swift */; };
 		045183942715E115003B9B9E /* NewMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045183932715E115003B9B9E /* NewMenuViewController.swift */; };
@@ -82,6 +84,8 @@
 		041CFEB2271D7C86005C8BD2 /* EarnAndLearnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnAndLearnViewController.swift; sourceTree = "<group>"; };
 		041CFEB5271D7C97005C8BD2 /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
 		041CFEB8271D7CB2005C8BD2 /* MySharedCatalogueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySharedCatalogueViewController.swift; sourceTree = "<group>"; };
+		042425412722D7F900304C25 /* WishListHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListHomeViewController.swift; sourceTree = "<group>"; };
+		042425422722D7F900304C25 /* WishListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListTableViewCell.swift; sourceTree = "<group>"; };
 		0447679C26E0EC060023A555 /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
 		044BBC2B26B9A9B4007426EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		045183932715E115003B9B9E /* NewMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 		046499C626BC07C60017EB9E /* TabBarClasses */ = {
 			isa = PBXGroup;
 			children = (
+				042425412722D7F900304C25 /* WishListHomeViewController.swift */,
+				042425422722D7F900304C25 /* WishListTableViewCell.swift */,
 				046499C726BC07EE0017EB9E /* HomeViewController.swift */,
 				046499CB26BC0BE00017EB9E /* MenuViewController.swift */,
 				046499CE26BC12200017EB9E /* OrdersViewController.swift */,
@@ -447,6 +453,7 @@
 				041260C626C6E81D00736C95 /* Reachability.swift in Sources */,
 				04D6366426B3093000C0C04B /* AppDelegate.swift in Sources */,
 				041260D226C6E89F00736C95 /* AlertManager.swift in Sources */,
+				042425432722D7F900304C25 /* WishListHomeViewController.swift in Sources */,
 				046783EE26D6CB66004666D6 /* CartViewController.swift in Sources */,
 				04D6DC5E26EA23C000BC537F /* ProductDetailViewController.swift in Sources */,
 				04060BD326DFFA8C0020EBBF /* AddNewAddressViewController.swift in Sources */,
@@ -461,6 +468,7 @@
 				041CFEB3271D7C86005C8BD2 /* EarnAndLearnViewController.swift in Sources */,
 				046499CF26BC12200017EB9E /* OrdersViewController.swift in Sources */,
 				04C078D126B9B0E800AD8979 /* OTPViewController.swift in Sources */,
+				042425442722D7F900304C25 /* WishListTableViewCell.swift in Sources */,
 				04D6366626B3093000C0C04B /* SceneDelegate.swift in Sources */,
 				04AAA5B126E295F700D5A989 /* SortTableViewCell.swift in Sources */,
 				04AAA5B726E2986A00D5A989 /* CategoryFilterViewController.swift in Sources */,

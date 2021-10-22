@@ -26,8 +26,14 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.tabBarController?.tabBar.isHidden = true
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+
+    }
     
     @IBAction func btnShowProfile(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "ProfileViewController") as! ProfileViewController
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func backBtnAction() {
         self.tabBarController?.tabBar.isHidden = false
@@ -75,7 +81,8 @@ class NewMenuViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let vc = storyboard?.instantiateViewController(identifier: "BankDetailsViewController")  as! BankDetailsViewController
             navigationController?.pushViewController(vc, animated: true)
         case "My Shared Catalogues":
-            let vc = storyboard?.instantiateViewController(identifier: "MySharedCatalogueViewController")  as! MySharedCatalogueViewController
+            let vc = storyboard?.instantiateViewController(identifier: "WishListHomeViewController")  as! WishListHomeViewController
+            vc.fromSharedCatalogue = true
             navigationController?.pushViewController(vc, animated: true)
         default:
             print("default")

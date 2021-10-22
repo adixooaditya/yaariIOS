@@ -19,30 +19,30 @@ class ProfileViewController: UIViewController {
     
     func setupNavigationBar() {
 
-        let button1 = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action:  #selector(btnMenuAction))
-        // action:#selector(Class.MethodName) for swift 3
-        self.navigationItem.leftBarButtonItem  = button1
-       
-        
-        let btnFavorite = UIButton.init(type: .custom)
-        btnFavorite.setImage(UIImage(named: "favorites"), for: .normal)
-           // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
-
-        let btnNotification = UIButton.init(type: .custom)
-        btnNotification.setImage(UIImage(named: "notifications"), for: .normal)
-            //btnEdit.addTarget(self, action: #selector(MyPageContainerViewController.editButtonPressed), for: .touchUpInside)
-        
-        let btnCart = UIButton.init(type: .custom)
-        btnCart.setImage(UIImage(named: "cart"), for: .normal)
-
-        let stackview = UIStackView.init(arrangedSubviews: [btnFavorite,btnNotification,btnCart])
-        stackview.distribution = .equalSpacing
-        stackview.axis = .horizontal
-        stackview.alignment = .center
-        stackview.spacing = 10
-
-        let rightBarButton = UIBarButtonItem(customView: stackview)
-        self.navigationItem.rightBarButtonItem = rightBarButton
+//        let button1 = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action:  #selector(btnMenuAction))
+//        // action:#selector(Class.MethodName) for swift 3
+//        self.navigationItem.leftBarButtonItem  = button1
+//       
+//        
+//        let btnFavorite = UIButton.init(type: .custom)
+//        btnFavorite.setImage(UIImage(named: "favorites"), for: .normal)
+//           // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
+//
+//        let btnNotification = UIButton.init(type: .custom)
+//        btnNotification.setImage(UIImage(named: "notifications"), for: .normal)
+//            //btnEdit.addTarget(self, action: #selector(MyPageContainerViewController.editButtonPressed), for: .touchUpInside)
+//        
+//        let btnCart = UIButton.init(type: .custom)
+//        btnCart.setImage(UIImage(named: "cart"), for: .normal)
+//
+//        let stackview = UIStackView.init(arrangedSubviews: [btnFavorite,btnNotification,btnCart])
+//        stackview.distribution = .equalSpacing
+//        stackview.axis = .horizontal
+//        stackview.alignment = .center
+//        stackview.spacing = 10
+//
+//        let rightBarButton = UIBarButtonItem(customView: stackview)
+//        self.navigationItem.rightBarButtonItem = rightBarButton
         
         
 

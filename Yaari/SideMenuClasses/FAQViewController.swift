@@ -11,7 +11,7 @@ class FAQViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "FAQ's"
         // Do any additional setup after loading the view.
     }
     

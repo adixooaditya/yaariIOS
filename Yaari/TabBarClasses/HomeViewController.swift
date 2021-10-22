@@ -84,6 +84,8 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         let btnFavorite = UIButton.init(type: .custom)
         btnFavorite.setImage(UIImage(named: "favorites"), for: .normal)
+        btnFavorite.addTarget(self, action:#selector(self.favoriteButtonPressed) , for: .touchUpInside)
+
            // btnSearch.addTarget(self, action: #selector(MyPageContainerViewController.searchButtonPressed), for: .touchUpInside)
 
         let btnNotification = UIButton.init(type: .custom)
@@ -107,6 +109,12 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
          self.title = "Home"
 
     }
+    @objc func favoriteButtonPressed() {
+        let vc = storyboard?.instantiateViewController(identifier: "WishListHomeViewController") as! WishListHomeViewController
+        vc.fromSharedCatalogue = false
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func cartButtonPressed() {
         let vc = storyboard?.instantiateViewController(identifier: "CartViewController") as! CartViewController
         navigationController?.pushViewController(vc, animated: true)
